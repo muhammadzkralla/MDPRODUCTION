@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:padding="16dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/img_order"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:scaleType="fitXY"/>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_order_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Today at: 13:05:56 pm"
+                android:fontFamily="@font/brandon_medium"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:textSize="14sp"/>
+
+            <TextView
+                android:id="@+id/tv_order_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Order number"
+                android:fontFamily="@font/brandon_medium"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:textStyle="italic"
+                android:textColor="@android:color/holo_red_dark"
+                android:textSize="12sp"/>
+
+            <TextView
+                android:id="@+id/tv_order_comment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Commnet"
+                android:fontFamily="@font/brandon_medium"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:textStyle="italic"
+                android:textColor="@android:color/holo_red_dark"
+                android:textSize="12sp"/>
+
+            <TextView
+                android:id="@+id/tv_order_status"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Status Placed"
+                android:fontFamily="@font/brandon_medium"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:textStyle="italic"
+                android:textColor="@android:color/holo_red_dark"
+                android:textSize="12sp"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

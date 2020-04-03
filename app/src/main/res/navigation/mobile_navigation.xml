@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.vuducminh.nicefood.ui.home.HomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/nav_menu"
+        android:name="com.vuducminh.nicefood.ui.menu.MenuFragment"
+        android:label="@string/menu_menu"
+        tools:layout="@layout/fragment_menu" />
+
+    <fragment
+        android:id="@+id/nav_food_detail"
+        android:name="com.vuducminh.nicefood.ui.fooddetail.FoodDetailFragment"
+        android:label="@string/menu_food_detail"
+        tools:layout="@layout/fragment_food_detail" />
+
+    <fragment
+        android:id="@+id/nav_view_orders"
+        android:name="com.vuducminh.nicefood.ui.view_orders.ViewOrdersFragment"
+        android:label="@string/menu_view_orders"
+        tools:layout="@layout/fragment_view_order" />
+
+    <fragment
+        android:id="@+id/nav_cart"
+        android:name="com.vuducminh.nicefood.ui.cart.CartFragment"
+        android:label="@string/menu_cart"
+        tools:layout="@layout/fragment_cart" />
+
+    <fragment
+        android:id="@+id/nav_food_list"
+        android:name="com.vuducminh.nicefood.ui.foodlist.FoodListFragment"
+        android:label="@string/menu_food_list"
+        tools:layout="@layout/fragment_food_list" />
+</navigation>
