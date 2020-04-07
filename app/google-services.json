@@ -8,6 +8,43 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:107284442175:android:0881d2dc28d63d95b89c8a",
+        "android_client_info": {
+          "package_name": "com.dimits.dimitsserver"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "107284442175-ah56mb3tm0j5rjeu1ao95kne44g4k6md.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dimits.dimitsserver",
+            "certificate_hash": "f2a1b7a52933e31adaff93699d5d830da2aaa5a8"
+          }
+        },
+        {
+          "client_id": "107284442175-o43eghijpnsj4r6k9s8d89dperqj47gh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXMYUA5WzQWOgcWPguhI6rDMDzM0AT7bo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "107284442175-o43eghijpnsj4r6k9s8d89dperqj47gh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:107284442175:android:0e16f017b8a4a7dbb89c8a",
         "android_client_info": {
           "package_name": "com.dimits.mahalladelivery"
@@ -52,10 +89,100 @@
       },
       "oauth_client": [
         {
+          "client_id": "107284442175-vsqc4k416htip7bufbeqkml58hq8sosm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.vuducminh.nicefood",
+            "certificate_hash": "addf814a833151b5c80fe50d482773efbca90818"
+          }
+        },
+        {
           "client_id": "107284442175-uncut3btd28qp9vcdhbpe6tkp7jd7m3u.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.vuducminh.nicefood",
+            "certificate_hash": "f2a1b7a52933e31adaff93699d5d830da2aaa5a8"
+          }
+        },
+        {
+          "client_id": "107284442175-o43eghijpnsj4r6k9s8d89dperqj47gh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXMYUA5WzQWOgcWPguhI6rDMDzM0AT7bo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "107284442175-o43eghijpnsj4r6k9s8d89dperqj47gh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:107284442175:android:9d405c051b7a340db89c8a",
+        "android_client_info": {
+          "package_name": "com.vuducminh.nicefoodserver"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "107284442175-eaij3er1adb14cp28fb5irffl6tmvik9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.vuducminh.nicefoodserver",
+            "certificate_hash": "addf814a833151b5c80fe50d482773efbca90818"
+          }
+        },
+        {
+          "client_id": "107284442175-k96vik0vcue4b74h706ui3ua20jh5hva.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.vuducminh.nicefoodserver",
+            "certificate_hash": "f2a1b7a52933e31adaff93699d5d830da2aaa5a8"
+          }
+        },
+        {
+          "client_id": "107284442175-o43eghijpnsj4r6k9s8d89dperqj47gh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXMYUA5WzQWOgcWPguhI6rDMDzM0AT7bo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "107284442175-o43eghijpnsj4r6k9s8d89dperqj47gh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:107284442175:android:dbdb97dd887e0024b89c8a",
+        "android_client_info": {
+          "package_name": "com.vuducminh.nicefoodshipper"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "107284442175-uq1np1lho07edssmjjfpd3e787fn3m7g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.vuducminh.nicefoodshipper",
             "certificate_hash": "f2a1b7a52933e31adaff93699d5d830da2aaa5a8"
           }
         },

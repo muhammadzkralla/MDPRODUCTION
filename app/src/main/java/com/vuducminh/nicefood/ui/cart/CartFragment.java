@@ -141,12 +141,12 @@ public class CartFragment extends Fragment implements ILoadTimeFromFirebaseListe
 
 
         EditText edt_comment = (EditText) view.findViewById(R.id.edt_comment);
-        TextView tv_address_detail = (TextView) view.findViewById(R.id.tv_address_detail);
+        EditText tv_address_detail = (EditText) view.findViewById(R.id.tv_address_detail);
         RadioButton rdi_home = (RadioButton) view.findViewById(R.id.rdi_home_address);
         RadioButton rdi_other_address = (RadioButton) view.findViewById(R.id.rdi_other_address);
-        RadioButton rdi_ship_to_this = (RadioButton) view.findViewById(R.id.rdi_ship_this_address);
+
         RadioButton rdi_cod = (RadioButton) view.findViewById(R.id.rdi_cod);
-        RadioButton rdi_braintree = (RadioButton) view.findViewById(R.id.rdi_braintree);
+
 
         places_fragment = (AutocompleteSupportFragment)getActivity().getSupportFragmentManager()
                 .findFragmentById(R.id.places_autocomplete_fragment);
@@ -182,58 +182,12 @@ public class CartFragment extends Fragment implements ILoadTimeFromFirebaseListe
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-
+                    tv_address_detail.setText("");
                     tv_address_detail.setVisibility(View.VISIBLE);
                 }
             }
         });
 
-        rdi_ship_to_this.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    fusedLocationProviderClient.getLastLocation()
-                            .addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    Toast.makeText(getContext(), "" + e.getMessage(), Toast.LENGTH_SHORT).show();
-                                    tv_address_detail.setVisibility(View.GONE);
-                                }
-                            })
-                            .addOnCompleteListener(new OnCompleteListener<Location>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Location> task) {
-                                    String coordinates = new StringBuilder()
-                                            .append(task.getResult().getLatitude())
-                                            .append("/")
-                                            .append(task.getResult().getLongitude()).toString();
-
-                                    Single<String> singleAddress = Single.just(getAddessFromLatLng(task.getResult().getLatitude(),
-                                            task.getResult().getLongitude()));
-
-                                    Disposable disposable = singleAddress.subscribeWith(new DisposableSingleObserver<String>() {
-                                        @Override
-                                        public void onSuccess(String s) {
-
-
-                                            tv_address_detail.setText(s);
-                                            tv_address_detail.setVisibility(View.VISIBLE);
-                                            places_fragment.setHint(s);
-                                        }
-
-                                        @Override
-                                        public void onError(Throwable e) {
-
-                                            tv_address_detail.setText(e.getMessage());
-                                            tv_address_detail.setVisibility(View.VISIBLE);
-                                        }
-                                    });
-
-                                }
-                            });
-                }
-            }
-        });
 
 
         builder.setView(view);
