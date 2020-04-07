@@ -330,7 +330,7 @@ public class FoodDetailFragment extends Fragment implements TextWatcher {
         cartDataSource = new LocalCartDataSource(CartDatabase.getInstance(getContext()).cartDAO());
         waitingDialog = new SpotsDialog.Builder().setCancelable(false).setContext(getContext()).build();
 
-        addBottomSheetDialog = new BottomSheetDialog(getContext(), R.style.DialogStyle);
+        addBottomSheetDialog = new BottomSheetDialog(getContext(), R.style.AppThemeNoActionBar);
         View layout_addon_display = getLayoutInflater().inflate(R.layout.layout_addon_display, null);
         chip_group_addon = (ChipGroup) layout_addon_display.findViewById(R.id.chip_group_addon);
         edt_search = (EditText) layout_addon_display.findViewById(R.id.edt_search);

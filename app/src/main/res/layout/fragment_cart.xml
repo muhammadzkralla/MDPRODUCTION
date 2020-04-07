@@ -51,10 +51,11 @@
                 android:layout_marginEnd="8dp"
                 android:textSize="24sp"/>
 
-            <com.google.android.material.button.MaterialButton
+            <Button
                 android:id="@+id/btn_place_order"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="#FFFF00"
                 android:text="Price Order"/>
 
         </LinearLayout>
