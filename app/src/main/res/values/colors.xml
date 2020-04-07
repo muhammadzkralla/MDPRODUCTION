@@ -10,4 +10,9 @@
     <color name="border_color">#AA333639</color>
     <color name="dialog_header_color">#C5C5C5</color>
     <color name="dialog_text_color">#464646</color>
+
+
+    <color name="bgRowBackground">#E11313</color>
+    <color name="colorGold3">#ffc125</color>
+    <color name="colorGold4">#E3AA1B</color>
 </resources>

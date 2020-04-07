@@ -74,6 +74,7 @@ public class MyCartAdapter extends RecyclerView.Adapter<MyCartAdapter.MyViewHold
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
+
         private Unbinder unbinder;
 
         @BindView(R.id.img_cart)

@@ -2,6 +2,7 @@ package com.vuducminh.nicefood.ui.cart;
 
 import android.content.DialogInterface;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -15,6 +16,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -23,6 +25,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
@@ -81,6 +84,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -148,10 +152,10 @@ public class CartFragment extends Fragment implements ILoadTimeFromFirebaseListe
         RadioButton rdi_cod = (RadioButton) view.findViewById(R.id.rdi_cod);
 
 
-        places_fragment = (AutocompleteSupportFragment)getActivity().getSupportFragmentManager()
-                .findFragmentById(R.id.places_autocomplete_fragment);
+        //places_fragment = (AutocompleteSupportFragment)getActivity().getSupportFragmentManager()
+             //   .findFragmentById(R.id.places_autocomplete_fragment);
 
-        places_fragment.setPlaceFields(placeFields);
+       /** places_fragment.setPlaceFields(placeFields);
         places_fragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
             @Override
             public void onPlaceSelected(@NonNull Place place) {
@@ -163,7 +167,7 @@ public class CartFragment extends Fragment implements ILoadTimeFromFirebaseListe
             public void onError(@NonNull Status status) {
                 Toast.makeText(getContext(),""+status.getStatusMessage(),Toast.LENGTH_SHORT).show();
             }
-        });
+        });**/
 
 
         tv_address_detail.setText(Common.currentUser.getAddress());
@@ -226,6 +230,11 @@ public class CartFragment extends Fragment implements ILoadTimeFromFirebaseListe
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
+
+        Objects.requireNonNull((AppCompatActivity)getActivity()).getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.colorGold3)));
+        Window window = getActivity().getWindow();
+        window.setStatusBarColor(getResources().getColor(R.color.colorGold4));
+
         cartViewModel =
                 ViewModelProviders.of(this).get(CartViewModel.class);
         View root = inflater.inflate(R.layout.fragment_cart, container, false);
@@ -260,6 +269,8 @@ public class CartFragment extends Fragment implements ILoadTimeFromFirebaseListe
     }
 
 
+
+
     private void initViews() {
 
         initPlaceView();
@@ -272,7 +283,8 @@ public class CartFragment extends Fragment implements ILoadTimeFromFirebaseListe
         recycler_cart.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recycler_cart.setLayoutManager(layoutManager);
-        recycler_cart.addItemDecoration(new DividerItemDecoration(getContext(), layoutManager.getOrientation()));
+        recycler_cart.addItemDecoration(new DividerItemDecoration(getContext(), 0));
+        //recycler_cart.addItemDecoration(new DividerItemDecoration(getContext(), layoutManager.getOrientation()));
 
         MySwiperHelper mySwiperHelper = new MySwiperHelper(getContext(), recycler_cart, 200) {
             @Override
@@ -355,7 +367,7 @@ public class CartFragment extends Fragment implements ILoadTimeFromFirebaseListe
 
                     @Override
                     public void onSuccess(Double aDouble) {
-                        tv_total_price.setText(new StringBuilder("Total: $").append(aDouble));
+                        tv_total_price.setText(new StringBuilder("L.E ").append(aDouble));
                     }
 
                     @Override
@@ -483,7 +495,7 @@ public class CartFragment extends Fragment implements ILoadTimeFromFirebaseListe
 
                     @Override
                     public void onSuccess(Double price) {
-                        tv_total_price.setText(new StringBuilder("Total: $")
+                        tv_total_price.setText(new StringBuilder("L.E ")
                                 .append(Common.formatPrice(price)));
                     }
 

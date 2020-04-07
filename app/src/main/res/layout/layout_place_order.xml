@@ -6,11 +6,7 @@
     android:orientation="vertical"
     android:padding="8dp">
 
-    <fragment
-        android:id="@+id/places_autocomplete_fragment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"/>
+
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
@@ -29,12 +25,13 @@
         android:id="@+id/tv_address_detail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:autofillHints=""
         android:fontFamily="@font/brandon_medium"
+        android:inputType="text"
         android:text="Your Address"
         android:textColor="@android:color/black"
         android:textSize="22sp"
         android:textStyle="bold" />
-
 
 
     <TextView
@@ -98,7 +95,6 @@
             android:textColor="@color/dialog_text_color"
             android:textSize="18sp"
             android:textStyle="italic" />
-
 
 
     </RadioGroup>

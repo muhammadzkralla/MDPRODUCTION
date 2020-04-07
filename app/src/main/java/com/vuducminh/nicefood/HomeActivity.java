@@ -225,10 +225,10 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         EditText edt_phone = (EditText) itemView.findViewById(R.id.et_phone);
 
-        places_fragment = (AutocompleteSupportFragment)getSupportFragmentManager()
-                .findFragmentById(R.id.places_autocomplete_fragment);
+        //places_fragment = (AutocompleteSupportFragment)getSupportFragmentManager()
+                //.findFragmentById(R.id.places_autocomplete_fragment);
 
-        places_fragment.setPlaceFields(placeFields);
+        /**places_fragment.setPlaceFields(placeFields);
         places_fragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
             @Override
             public void onPlaceSelected(@NonNull Place place) {
@@ -240,10 +240,10 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             public void onError(@NonNull Status status) {
                 Toast.makeText(HomeActivity.this,""+status.getStatusMessage(),Toast.LENGTH_SHORT).show();
             }
-        });
+        });**/
 
 
-        // Dổ dữ liệu và bắt sự kiện
+
         edt_phone.setText(Common.currentUser.getPhone());
         tv_address_detail.setText(Common.currentUser.getAddress());
 
