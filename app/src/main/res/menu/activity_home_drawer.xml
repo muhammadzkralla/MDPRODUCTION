@@ -37,6 +37,20 @@
             android:title="@string/update_info" />
     </group>
 
+      <item
+        android:id="@+id/nav_about_us"
+        android:icon="@drawable/ic_info_black_24dp"
+        android:iconTint="@android:color/white"
+        android:title="About Us" />
+
+    <group >
+      <item
+        android:id="@+id/nav_contact_us"
+        android:icon="@drawable/ic_phone_black_24dp"
+        android:iconTint="@android:color/white"
+        android:title="Contact Us" />
+    </group>
+
     <group android:id="@+id/user_group">
         <item
             android:id="@+id/nav_sign_out"

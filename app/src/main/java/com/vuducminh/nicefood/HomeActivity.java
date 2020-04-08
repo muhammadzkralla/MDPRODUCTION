@@ -2,6 +2,7 @@ package com.vuducminh.nicefood;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import com.andremion.counterfab.CounterFab;
@@ -59,6 +60,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
+import android.view.Window;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -71,6 +73,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -112,7 +115,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        
+
+
         initPlaceClient();
 
         dialog = new SpotsDialog.Builder().setContext(this).setCancelable(false).build();
@@ -208,6 +212,16 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 showUpdateInfoDialog();
                 break;
             }
+            case R.id.nav_contact_us:{
+                Intent contact = new Intent(HomeActivity.this,ContactUs.class);
+                startActivity(contact);
+            }
+
+            case R.id.nav_about_us:{
+                Intent about = new Intent(HomeActivity.this,AboutUs.class);
+                startActivity(about);
+            }
+
 
         }
         menuClickId = item.getItemId();
@@ -536,8 +550,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                     @Override
                     public void onError(Throwable e) {
                         if(!e.getMessage().contains("query returned empty")) {
-                            Toast.makeText(HomeActivity.this,"[COUNT CART]"+e.getMessage(),Toast.LENGTH_SHORT).show();
-                            Log.e("Count_Error",e.getMessage());
+                           // Toast.makeText(HomeActivity.this,"[COUNT CART]"+e.getMessage(),Toast.LENGTH_SHORT).show();
+                           // Log.e("Count_Error",e.getMessage());
                         }
                         else{
                             fab.setCount(0);

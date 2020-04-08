@@ -174,7 +174,7 @@ public class CartFragment extends Fragment implements ILoadTimeFromFirebaseListe
 
         tv_address_detail.setText(Common.currentUser.getAddress());
 
-        rdi_home.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+       /** rdi_home.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
@@ -183,7 +183,7 @@ public class CartFragment extends Fragment implements ILoadTimeFromFirebaseListe
                     places_fragment.setHint(Common.currentUser.getAddress());
                 }
             }
-        });
+        });**/
         rdi_other_address.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -193,7 +193,6 @@ public class CartFragment extends Fragment implements ILoadTimeFromFirebaseListe
                 }
             }
         });
-
 
 
         builder.setView(view);
