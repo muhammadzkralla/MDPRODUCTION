@@ -233,26 +233,23 @@ public class FoodDetailFragment extends Fragment implements TextWatcher {
 
     private void displayAddonList() {
         if (Common.selectedFood.getAddon().size() > 0) {
-            chip_group_addon.clearCheck();   // Xóa các check đã chọn trước đó
+            chip_group_addon.clearCheck();
             chip_group_addon.removeAllViews();
 
             edt_search.addTextChangedListener(this);
 
-            //Thêm tất cả view
+
             for (AddonModel addonModel : Common.selectedFood.getAddon()) {
 
                 Chip chip = (Chip) getLayoutInflater().inflate(R.layout.layout_addon_item, null);
-                chip.setText(new StringBuilder(addonModel.getName()).append("(+$")
+                chip.setText(new StringBuilder(addonModel.getName()).append("(+L.E")
                         .append(addonModel.getPrice()).append(")"));
-                chip.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                        if (isChecked) {
-                            if (Common.selectedFood.getUserSelectedAddon() == null) {
-                                Common.selectedFood.setUserSelectedAddon(new ArrayList<>());
-                            }
+                chip.setOnCheckedChangeListener((buttonView, isChecked) -> {
+                    if (isChecked) {
+                        if (Common.selectedFood.getUserSelectedAddon() == null)
+                            Common.selectedFood.setUserSelectedAddon(new ArrayList<>());
                             Common.selectedFood.getUserSelectedAddon().add(addonModel);
-                        }
+
                     }
                 });
                 chip_group_addon.addView(chip);
@@ -330,7 +327,7 @@ public class FoodDetailFragment extends Fragment implements TextWatcher {
         cartDataSource = new LocalCartDataSource(CartDatabase.getInstance(getContext()).cartDAO());
         waitingDialog = new SpotsDialog.Builder().setCancelable(false).setContext(getContext()).build();
 
-        addBottomSheetDialog = new BottomSheetDialog(getContext(), R.style.AppThemeNoActionBar);
+        addBottomSheetDialog = new BottomSheetDialog(getContext(), R.style.DialogStyle);
         View layout_addon_display = getLayoutInflater().inflate(R.layout.layout_addon_display, null);
         chip_group_addon = (ChipGroup) layout_addon_display.findViewById(R.id.chip_group_addon);
         edt_search = (EditText) layout_addon_display.findViewById(R.id.edt_search);
@@ -354,7 +351,7 @@ public class FoodDetailFragment extends Fragment implements TextWatcher {
             for (AddonModel addonModel : Common.selectedFood.getUserSelectedAddon()) {
 
                 Chip chip = (Chip) getLayoutInflater().inflate(R.layout.layout_chip_with_delete_icon, null);
-                chip.setText(new StringBuilder(addonModel.getName()).append("(+$")
+                chip.setText(new StringBuilder(addonModel.getName()).append("(+L.E")
                         .append(addonModel.getPrice()).append(")"));
 
                 chip.setClickable(false);
@@ -477,7 +474,7 @@ public class FoodDetailFragment extends Fragment implements TextWatcher {
                     if (isChecked) {
                         Common.selectedFood.setUserSelectedSize(sizeModel);
                     }
-                    calculateTotalPrice(); // Tính lại giá tiền
+                    calculateTotalPrice();
                 }
             });
 
@@ -499,8 +496,7 @@ public class FoodDetailFragment extends Fragment implements TextWatcher {
     }
 
     private void calculateTotalPrice() {
-        double totalPrice = Double.parseDouble(Common.selectedFood.getPrice().toString());
-        double displayPrice = 0.0;
+        double totalPrice = Double.parseDouble(Common.selectedFood.getPrice().toString()),displayPrice = 0.0;
 
         //Addon
         if (Common.selectedFood.getUserSelectedAddon() != null
@@ -534,17 +530,15 @@ public class FoodDetailFragment extends Fragment implements TextWatcher {
         for (AddonModel addonModel : Common.selectedFood.getAddon()) {
             if (addonModel.getName().toLowerCase().contains(s.toString().toLowerCase())) {
                 Chip chip = (Chip) getLayoutInflater().inflate(R.layout.layout_addon_item, null);
-                chip.setText(new StringBuilder(addonModel.getName()).append("(+$")
+                chip.setText(new StringBuilder(addonModel.getName()).append("(+L.E")
                         .append(addonModel.getPrice()).append(")"));
-                chip.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                        if (isChecked) {
-                            if (Common.selectedFood.getUserSelectedAddon() == null) {
-                                Common.selectedFood.setUserSelectedAddon(new ArrayList<>());
-                            }
+                chip.setOnCheckedChangeListener((buttonView, isChecked) -> {
+                    if (isChecked) {
+                        if (Common.selectedFood.getUserSelectedAddon() == null) {
+                            Common.selectedFood.setUserSelectedAddon(new ArrayList<>());
                             Common.selectedFood.getUserSelectedAddon().add(addonModel);
                         }
+
                     }
                 });
                 chip_group_addon.addView(chip);

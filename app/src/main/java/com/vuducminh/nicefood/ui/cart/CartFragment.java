@@ -1,5 +1,6 @@
 package com.vuducminh.nicefood.ui.cart;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -10,6 +11,7 @@ import android.os.Bundle;
 import android.os.Looper;
 import android.os.Parcelable;
 import android.util.Log;
+import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;

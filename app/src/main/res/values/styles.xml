@@ -1,32 +1,57 @@
-<?xml version="1.0"?>
-
 <resources>
 
-    -<style parent="Theme.AppCompat.Light.NoActionBar" name="AppTheme">
-    <item name="colorPrimary">@color/colorPrimary</item>
-
-    <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-
-    <item name="colorAccent">@color/colorAccent</item>
-</style>
-
-
-    -<style name="AppThemeNoActionBar">
-    <item name="windowActionBar">false</item>
-
-
-
-    <item name="windowNoTitle">true</item>
-
-</style>
-
-    <style parent="ThemeOverlay.AppCompat.Dark.ActionBar" name="AppTheme.AppBarOverlay"/>
-
-    <style parent="ThemeOverlay.AppCompat.Light" name="AppTheme.PopupOverlay"/>
-    <style name="ToolbarColoredBackArrow" parent="AppTheme">
-        <item name="android:textColorSecondary">@android:color/black</item>number_button
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar.Bridge">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+
+    <style name="ElegantNumberButton" >
+        <item name="colorPrimary">@color/colorGold3</item>
+        <item name="colorBackgroundFloating">@color/colorGold3</item>
+        <item name="backGroundColor">@color/colorGold3</item>
+
+    </style>
+
+
+
+    <style name="PlaceOrder">
+        <item name="android:shape">rectangle</item>
+        <item name="android:solidColor">@color/colorGold3</item>
+        <item name="cornerRadius">15dp</item>
+        <item name="background">@color/colorGold3</item>
+        <item name="backGroundColor">@color/colorGold3</item>
+        <item name="backgroundTint">@color/colorGold3</item>
+
+    </style>
+
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Widget.MaterialComponents.Chip.Entry" parent="Base.Widget.MaterialComponents.Chip">
+        <item name="android:checkable">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="ToolbarColoredBackArrow" parent="AppTheme">
+        <item name="android:textColorSecondary">@android:color/black</item>
+    </style>
+
+    <style name="DialogStyle" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowSoftInputMode">adjustResize</item>
+
+    </style>
 </resources>
 
 
