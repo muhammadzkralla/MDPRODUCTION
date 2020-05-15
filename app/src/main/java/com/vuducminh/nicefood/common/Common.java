@@ -39,6 +39,7 @@ public class Common {
     public static CategoryModel categorySelected;
     public static FoodModel selectedFood;
     public static String currentToken = "";
+    public static final String RESTAURANT_REF = "Restaurant";
 
     public static String formatPrice(double price) {
         if (price != 0) {

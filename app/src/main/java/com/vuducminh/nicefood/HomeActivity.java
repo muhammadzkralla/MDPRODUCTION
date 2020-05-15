@@ -2,14 +2,11 @@ package com.vuducminh.nicefood;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import com.andremion.counterfab.CounterFab;
-import com.google.android.gms.common.api.Status;
-import com.google.android.gms.tasks.OnCompleteListener;
+
 import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.Place;
@@ -89,6 +86,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private DrawerLayout drawer;
     private NavController navController;
     private CartDataSource cartDataSource;
+    private NavigationView navigationView;
 
     private android.app.AlertDialog dialog;
 
@@ -128,17 +126,13 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                navController.navigate(R.id.nav_cart);
-            }
-        });
+        fab.setOnClickListener(view -> navController.navigate(R.id.nav_cart));
         drawer = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.nav_view);
+         navigationView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
+                R.id.nav_restaurant,
                 R.id.nav_home, R.id.nav_menu, R.id.nav_food_detail,
                 R.id.nav_view_orders, R.id.nav_cart, R.id.nav_food_list)
                 .setDrawerLayout(drawer)
@@ -213,13 +207,19 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 break;
             }
             case R.id.nav_contact_us:{
-                Intent contact = new Intent(HomeActivity.this,ContactUs.class);
-                startActivity(contact);
+                if(item.getItemId() != menuClickId) {
+                    Intent contact = new Intent(HomeActivity.this, ContactUs.class);
+                    startActivity(contact);
+                }
+                break;
             }
 
             case R.id.nav_about_us:{
-                Intent about = new Intent(HomeActivity.this,AboutUs.class);
-                startActivity(about);
+                if(item.getItemId() != menuClickId) {
+                    Intent about = new Intent(HomeActivity.this, AboutUs.class);
+                    startActivity(about);
+                }
+                break;
             }
 
 

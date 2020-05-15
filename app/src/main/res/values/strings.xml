@@ -12,6 +12,7 @@
     <string name="action_settings">Settings</string>
 
     <string name="menu_home">Home</string>
+    <string name="menu_restaurant">Restaurant</string>
     <string name="menu_food_detail">Food Detail</string>
     <string name="menu_tools">Tools</string>
     <string name="menu_cart">Cart</string>
