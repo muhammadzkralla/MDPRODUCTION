@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void checkUserFromFirebase(FirebaseUser user) {
-        dialog.show();
+        //dialog.show();
         userRef.child(user.getUid())
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
@@ -114,12 +114,12 @@ public class MainActivity extends AppCompatActivity {
                             showRegisterDialog(user);
                         }
 
-                        dialog.dismiss();
+                        //dialog.dismiss();
                     }
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
-                        dialog.dismiss();
+                        //dialog.dismiss();
                         Toast.makeText(MainActivity.this, "" + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });

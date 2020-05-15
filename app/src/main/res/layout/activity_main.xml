@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,5 +8,25 @@
     android:background="@color/background_color"
     tools:context=".MainActivity">
 
+    <TextView
+        android:id="@+id/main"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mahalla Delivery"
+        android:textSize="40sp"
+        android:layout_weight="1"
+        android:layout_centerInParent="true"
+        android:fontFamily="@font/brandon_medium"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="welcome!"
+        android:layout_below="@+id/main"
+        android:layout_centerHorizontal="true"
+        android:textSize="24sp"
+        android:textStyle="italic"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+</RelativeLayout>

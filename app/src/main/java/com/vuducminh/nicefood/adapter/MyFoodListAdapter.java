@@ -181,8 +181,7 @@ public class MyFoodListAdapter extends RecyclerView.Adapter<MyFoodListAdapter.My
         TextView tv_food_price;
         @BindView(R.id.img_food_image)
         ImageView img_food_image;
-        @BindView(R.id.img_fav)
-        ImageView img_fav;
+
         @BindView(R.id.img_quick_cart)
         ImageView img_quick_cart;
 
