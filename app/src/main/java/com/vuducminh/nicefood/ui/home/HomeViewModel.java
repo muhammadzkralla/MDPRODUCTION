@@ -11,6 +11,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.vuducminh.nicefood.callback.IBestDealCallbackListener;
 import com.vuducminh.nicefood.callback.IPopularCallbackListener;
+import com.vuducminh.nicefood.common.Common;
 import com.vuducminh.nicefood.common.CommonAgr;
 import com.vuducminh.nicefood.model.BestDealModel;
 import com.vuducminh.nicefood.model.PopluarCategoryModel;
@@ -31,27 +32,30 @@ public class HomeViewModel extends ViewModel implements IPopularCallbackListener
        bestDealCallbackListener = this;
     }
 
-    public MutableLiveData<List<PopluarCategoryModel>> getPopularList() {
+    public MutableLiveData<List<PopluarCategoryModel>> getPopularList(String key) {
         if(popularList == null) {
             popularList = new MutableLiveData<>();
             messageError = new MutableLiveData<>();
-            loadPopularList();
+            loadPopularList(key);
         }
         return popularList;
     }
 
-    public MutableLiveData<List<BestDealModel>> getBestDealList() {
+    public MutableLiveData<List<BestDealModel>> getBestDealList(String key) {
         if(bestDealList == null) {
             bestDealList = new MutableLiveData<>();
             messageError = new MutableLiveData<>();
-            loadBestDealList();
+            loadBestDealList(key);
         }
         return bestDealList;
     }
 
-    private void loadBestDealList() {
+    public void loadBestDealList(String key) {
         List<BestDealModel> tempList = new ArrayList<>();
-        DatabaseReference bestDealRef = FirebaseDatabase.getInstance().getReference(CommonAgr.BEST_DEAL_REF);
+        DatabaseReference bestDealRef = FirebaseDatabase.getInstance()
+                .getReference(Common.RESTAURANT_REF)
+                .child(key)
+                .child(Common.BEST_DEAL_REF);
         bestDealRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -69,9 +73,12 @@ public class HomeViewModel extends ViewModel implements IPopularCallbackListener
         });
     }
 
-    private void loadPopularList() {
+    public void loadPopularList(String key) {
         List<PopluarCategoryModel> tempList = new ArrayList<>();
-        DatabaseReference popularRef = FirebaseDatabase.getInstance().getReference(CommonAgr.POPULAR_CATEGORY_REF);
+        DatabaseReference popularRef = FirebaseDatabase.getInstance()
+                .getReference(Common.RESTAURANT_REF)
+                .child(key)
+                .child(Common.POPULAR_CATEGORY_REF);
         popularRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -112,4 +119,6 @@ public class HomeViewModel extends ViewModel implements IPopularCallbackListener
     public void onBestDealLoadFailed(String message) {
         messageError.setValue(message);
     }
+
+
 }

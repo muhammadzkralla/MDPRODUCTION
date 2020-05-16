@@ -13,7 +13,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.vuducminh.nicefood.R;
 import com.vuducminh.nicefood.callback.IRecyclerClickListener;
+import com.vuducminh.nicefood.common.Common;
+import com.vuducminh.nicefood.eventbus.MenuItemEvent;
 import com.vuducminh.nicefood.model.RestaurantModel;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
@@ -46,7 +50,8 @@ public class MyRestaurantAdapter extends RecyclerView.Adapter<MyRestaurantAdapte
 
         //event
         holder.setListener((view, pos) -> {
-            //code late
+            Common.currentRestaurant = restaurantModelList.get(pos);
+            EventBus.getDefault().postSticky(new MenuItemEvent(true,restaurantModelList.get(pos)));
         });
     }
 

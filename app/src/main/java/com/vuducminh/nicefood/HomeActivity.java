@@ -46,6 +46,7 @@ import com.vuducminh.nicefood.eventbus.CountCartEvent;
 import com.vuducminh.nicefood.eventbus.FoodItemClick;
 import com.vuducminh.nicefood.eventbus.HideFABCart;
 import com.vuducminh.nicefood.eventbus.MenuItemBack;
+import com.vuducminh.nicefood.eventbus.MenuItemEvent;
 import com.vuducminh.nicefood.eventbus.PopluarCategoryClick;
 import com.vuducminh.nicefood.model.CategoryModel;
 import com.vuducminh.nicefood.model.FoodModel;
@@ -174,6 +175,12 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         item.setCheckable(true);
         drawer.closeDrawers();
         switch (item.getItemId()) {
+            case R.id.nav_restaurant:
+                if(item.getItemId() != menuClickId) {
+                    navController.navigate(R.id.nav_restaurant);
+                }
+                break;
+
             case R.id.nav_home: {
                 if(item.getItemId() != menuClickId) {
                     navController.navigate(R.id.nav_home);
@@ -568,4 +575,13 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-}
+    @Subscribe(sticky = true,threadMode = ThreadMode.MAIN)
+    public void onRestaurantClick(MenuItemEvent event) {
+
+        Bundle bundle = new Bundle();
+        bundle.putString("restaurant",event.getRestaurantModel().getUid());
+        navController.navigate(R.id.nav_home,bundle);
+        navigationView.getMenu().clear();
+        navigationView.inflateMenu(R.menu.restaurant_detail_menu);
+        }
+    }

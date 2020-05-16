@@ -10,6 +10,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.vuducminh.nicefood.callback.ICategoryCallbackListener;
+import com.vuducminh.nicefood.common.Common;
 import com.vuducminh.nicefood.common.CommonAgr;
 import com.vuducminh.nicefood.model.CategoryModel;
 
@@ -37,7 +38,11 @@ public class MenuViewModel extends ViewModel implements ICategoryCallbackListene
 
     public void loadCategories() {
         List<CategoryModel> tempList = new ArrayList<>();
-        DatabaseReference categoryRef = FirebaseDatabase.getInstance().getReference(CommonAgr.CATEGORY_REF);
+        DatabaseReference categoryRef = FirebaseDatabase
+                .getInstance()
+                .getReference(Common.RESTAURANT_REF)
+                .child(Common.currentRestaurant.getUid())
+                .child(CommonAgr.CATEGORY_REF);
         categoryRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

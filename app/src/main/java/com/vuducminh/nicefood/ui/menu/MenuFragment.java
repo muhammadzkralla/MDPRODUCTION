@@ -83,7 +83,7 @@ public class MenuFragment extends Fragment {
 
         dialog = new SpotsDialog.Builder().setContext(getContext()).setCancelable(false).build();
         dialog.show();
-
+        layoutAnimationController = AnimationUtils.loadLayoutAnimation(getContext(),R.anim.layout_item_from_left);
         GridLayoutManager layoutManager = new GridLayoutManager(getContext(),2);
         layoutManager.setOrientation(RecyclerView.VERTICAL);
         layoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
@@ -92,7 +92,7 @@ public class MenuFragment extends Fragment {
                 if(adapter != null) {
                     switch (adapter.getItemViewType(position)) {
                         case CommonAgr.DEFAULT_COLUMN_COUNT: return 1;
-                        case CommonAgr.FULL_WIDTH_COLUMN: return 1;
+                        case CommonAgr.FULL_WIDTH_COLUMN: return 2;
                         default: return -1;
                     }
                 }

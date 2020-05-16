@@ -3,12 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <group android:id="@+id/home_group">
-        <item
-            android:id="@+id/nav_home"
-            android:icon="@drawable/ic_home_black_24dp"
-            android:title="@string/menu_home" />
-    </group>
+
 
     <group android:id="@+id/category_group">
         <item
