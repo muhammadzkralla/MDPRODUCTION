@@ -22,7 +22,12 @@ import android.widget.Toast;
 
 import com.vuducminh.nicefood.R;
 import com.vuducminh.nicefood.adapter.MyRestaurantAdapter;
+import com.vuducminh.nicefood.eventbus.CountCartEvent;
+import com.vuducminh.nicefood.eventbus.HideFABCart;
+import com.vuducminh.nicefood.eventbus.MenuInflateEvent;
 import com.vuducminh.nicefood.model.RestaurantModel;
+
+import org.greenrobot.eventbus.EventBus;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -64,6 +69,7 @@ public class RestaurantFragment extends Fragment {
     }
 
     private void initViews() {
+        EventBus.getDefault().postSticky(new HideFABCart(true));// Hide when user back to this fragment
         setHasOptionsMenu(true);
         dialog =  new AlertDialog.Builder(getContext()).setCancelable(false)
                 .setMessage("Please wait...").create();
@@ -75,5 +81,10 @@ public class RestaurantFragment extends Fragment {
         recycler_restaurant.addItemDecoration(new DividerItemDecoration(getContext(),linearLayoutManager.getOrientation()));
     }
 
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        EventBus.getDefault().postSticky(new CountCartEvent(true));
+        EventBus.getDefault().postSticky(new MenuInflateEvent(false));
+    }
 }

@@ -357,7 +357,8 @@ public class CartFragment extends Fragment implements ILoadTimeFromFirebaseListe
     }
 
     private void sumAllItemCart() {
-        cartDataSource.sumPriceInCart(Common.currentUser.getUid())
+        cartDataSource.sumPriceInCart(Common.currentUser.getUid(),
+                Common.currentRestaurant.getUid())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<Double>() {
@@ -432,7 +433,8 @@ public class CartFragment extends Fragment implements ILoadTimeFromFirebaseListe
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.action_clear_cart) {
-            cartDataSource.cleanCart(Common.currentUser.getUid())
+            cartDataSource.cleanCart(Common.currentUser.getUid(),
+                    Common.currentRestaurant.getUid())
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(new SingleObserver<Integer>() {
@@ -485,7 +487,8 @@ public class CartFragment extends Fragment implements ILoadTimeFromFirebaseListe
     }
 
     private void calculateTotalPrice() {
-        cartDataSource.sumPriceInCart(Common.currentUser.getUid())
+        cartDataSource.sumPriceInCart(Common.currentUser.getUid(),
+                Common.currentRestaurant.getUid())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<Double>() {
@@ -531,10 +534,12 @@ public class CartFragment extends Fragment implements ILoadTimeFromFirebaseListe
     }
 
     private void paymentCOD(String address, String comment) {
-        compositeDisposable.add(cartDataSource.getAllCart(Common.currentUser.getUid())
+        compositeDisposable.add(cartDataSource.getAllCart(Common.currentUser.getUid(),
+                Common.currentRestaurant.getUid())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(cartItems -> cartDataSource.sumPriceInCart(Common.currentUser.getUid())
+                .subscribe(cartItems -> cartDataSource.sumPriceInCart(Common.currentUser.getUid(),
+                        Common.currentRestaurant.getUid())
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(new SingleObserver<Double>() {
@@ -617,7 +622,8 @@ public class CartFragment extends Fragment implements ILoadTimeFromFirebaseListe
                 }).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-                cartDataSource.cleanCart(Common.currentUser.getUid())
+                cartDataSource.cleanCart(Common.currentUser.getUid(),
+                         Common.currentRestaurant.getUid())
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(new SingleObserver<Integer>() {

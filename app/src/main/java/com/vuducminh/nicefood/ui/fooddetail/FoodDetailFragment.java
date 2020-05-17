@@ -133,9 +133,11 @@ public class FoodDetailFragment extends Fragment implements TextWatcher {
     @OnClick(R.id.btnCart)
     void onCartItemAddon() {
         CartItem cartItem = new CartItem();
+        cartItem.setRestaurantId(Common.currentRestaurant.getUid());
         cartItem.setUid(Common.currentUser.getUid());
         cartItem.setUserPhone(Common.currentUser.getPhone());
 
+        cartItem.setCategoryId(Common.categorySelected.getMenu_id());
         cartItem.setFoodId(Common.selectedFood.getId());
         cartItem.setFoodName(Common.selectedFood.getName());
         cartItem.setFoodImage(Common.selectedFood.getImage());
@@ -159,9 +161,11 @@ public class FoodDetailFragment extends Fragment implements TextWatcher {
         }
 
         cartDataSource.getItemAllOptionsInCart(Common.currentUser.getUid(),
+                Common.categorySelected.getMenu_id(),
                 cartItem.getFoodId(),
                 cartItem.getFoodSize(),
-                cartItem.getFoodAddon())
+                cartItem.getFoodAddon(),
+                Common.currentRestaurant.getUid())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<CartItem>() {
