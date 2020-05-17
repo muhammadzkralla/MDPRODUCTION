@@ -611,7 +611,9 @@ public class CartFragment extends Fragment implements ILoadTimeFromFirebaseListe
 
     private void writeOrderToFireBase(OrderModel orderModel) {
         FirebaseDatabase.getInstance()
-                .getReference(CommonAgr.ORDER_REF)
+                .getReference(Common.RESTAURANT_REF)
+                .child(Common.currentRestaurant.getUid())
+                .child(CommonAgr.ORDER_REF)
                 .child(Common.creteOrderNumber())    // Create orderModel number with only digit
                 .setValue(orderModel)
                 .addOnFailureListener(new OnFailureListener() {

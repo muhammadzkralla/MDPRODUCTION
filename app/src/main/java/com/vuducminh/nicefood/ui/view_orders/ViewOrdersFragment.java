@@ -26,8 +26,11 @@ import com.vuducminh.nicefood.callback.ILoadOrderCallbackListener;
 import com.vuducminh.nicefood.common.Common;
 import com.vuducminh.nicefood.common.CommonAgr;
 import com.vuducminh.nicefood.common.MySwiperHelper;
+import com.vuducminh.nicefood.eventbus.MenuItemBack;
 import com.vuducminh.nicefood.model.OrderModel;
 import com.vuducminh.nicefood.R;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -70,7 +73,10 @@ public class ViewOrdersFragment extends Fragment implements ILoadOrderCallbackLi
 
     private void loadOrdersFromFirebase() {
         List<OrderModel> orderModelList = new ArrayList<>();
-        FirebaseDatabase.getInstance().getReference(CommonAgr.ORDER_REF)
+        FirebaseDatabase.getInstance()
+                .getReference(Common.RESTAURANT_REF)
+                .child(Common.currentRestaurant.getUid())
+                .child(CommonAgr.ORDER_REF)
                 .orderByChild("userId")
                 .equalTo(Common.currentUser.getUid())
                 .limitToLast(100)
@@ -163,4 +169,11 @@ public class ViewOrdersFragment extends Fragment implements ILoadOrderCallbackLi
         Toast.makeText(getContext(),message,Toast.LENGTH_SHORT).show();
     }
 
+
+
+    @Override
+    public void onDestroy() {
+        EventBus.getDefault().postSticky(new MenuItemBack());
+        super.onDestroy();
+    }
 }
