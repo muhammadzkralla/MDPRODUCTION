@@ -124,7 +124,9 @@ public class ViewOrdersFragment extends Fragment implements ILoadOrderCallbackLi
                                             Map<String,Object> update_data = new HashMap<>();
                                             update_data.put("orderStatus",-1);
                                             FirebaseDatabase.getInstance()
-                                                    .getReference(CommonAgr.ORDER_REF)
+                                                    .getReference(Common.RESTAURANT_REF)
+                                                    .child(Common.currentRestaurant.getUid())
+                                                    .child(CommonAgr.ORDER_REF)
                                                     .child(orderModel.getOrderNumber())
                                                     .updateChildren(update_data)
                                                     .addOnFailureListener(new OnFailureListener() {
