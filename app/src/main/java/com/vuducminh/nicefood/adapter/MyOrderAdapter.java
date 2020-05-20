@@ -58,6 +58,7 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.MyViewHo
         holder.tv_order_number.setText(new StringBuilder("OrderModel number: ").append(orderModel.getOrderNumber()));
         holder.tv_order_comment.setText(new StringBuilder("Comment: ").append(orderModel.getCommet()));
         holder.tv_order_status.setText(new StringBuilder("Status: ").append(Common.convertStatusToText(orderModel.getOrderStatus())));
+        holder.tv_order_price.setText(new StringBuilder("Price: ").append(orderModel.getFinalPayment()));
     }
 
     @Override
@@ -77,6 +78,7 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.MyViewHo
 
         private Unbinder unbinder;
 
+
         @BindView(R.id.img_order)
         ImageView img_order;
         @BindView(R.id.tv_order_date)
@@ -87,6 +89,8 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.MyViewHo
         TextView tv_order_comment;
         @BindView(R.id.tv_order_status)
         TextView tv_order_status;
+        @BindView(R.id.tv_order_price)
+        TextView tv_order_price;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
