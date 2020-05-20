@@ -7,6 +7,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Looper;
 import android.os.Parcelable;
@@ -26,6 +27,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
@@ -54,6 +56,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.vuducminh.nicefood.adapter.MyCartAdapter;
 import com.vuducminh.nicefood.callback.ILoadTimeFromFirebaseListener;
@@ -69,10 +72,15 @@ import com.vuducminh.nicefood.eventbus.HideFABCart;
 import com.vuducminh.nicefood.eventbus.MenuItemBack;
 import com.vuducminh.nicefood.eventbus.UpdateItemInCart;
 import com.vuducminh.nicefood.model.FCMservice.FCMSendData;
+
 import com.vuducminh.nicefood.model.OrderModel;
 import com.vuducminh.nicefood.R;
+
+import com.vuducminh.nicefood.remote.ICloudFunction;
 import com.vuducminh.nicefood.remote.IFCMService;
 import com.vuducminh.nicefood.remote.RetrofitFCMClient;
+import com.vuducminh.nicefood.remote.RetrofitICloudClient;
+
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -99,6 +107,9 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.observers.DisposableSingleObserver;
 import io.reactivex.schedulers.Schedulers;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class CartFragment extends Fragment implements ILoadTimeFromFirebaseListener {
 
@@ -140,6 +151,7 @@ public class CartFragment extends Fragment implements ILoadTimeFromFirebaseListe
 
     @OnClick(R.id.btn_place_order)
     void onPlaceOrderClick() {
+
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setTitle("One more step!");
 
@@ -224,6 +236,8 @@ public class CartFragment extends Fragment implements ILoadTimeFromFirebaseListe
     }
 
 
+
+
     private MyCartAdapter adapter;
 
     private Unbinder unbinder;
@@ -231,6 +245,7 @@ public class CartFragment extends Fragment implements ILoadTimeFromFirebaseListe
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
+
 
         Objects.requireNonNull((AppCompatActivity)getActivity()).getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.colorGold3)));
         Window window = getActivity().getWindow();
@@ -240,7 +255,7 @@ public class CartFragment extends Fragment implements ILoadTimeFromFirebaseListe
                 ViewModelProviders.of(this).get(CartViewModel.class);
         View root = inflater.inflate(R.layout.fragment_cart, container, false);
 
-//        iCloudFunction = RetrofitICloudClient.getInstance().create(ICloudFunction.class);
+        //iCloudFunction = RetrofitICloudClient.getInstance().create(ICloudFunction.class);
         ifcmService = RetrofitFCMClient.getInstance().create(IFCMService.class);
         iLoadTimeListener = this;
 

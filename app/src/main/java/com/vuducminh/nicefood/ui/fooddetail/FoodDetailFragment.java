@@ -377,9 +377,11 @@ public class FoodDetailFragment extends Fragment implements TextWatcher {
 
     private void submitRatingToFirebase(CommentModel commentModel) {
         waitingDialog.show();
-        // Tải dữ liệu đánh giá lên Firebase
+        // first we will submit to comments
         FirebaseDatabase.getInstance()
-                .getReference(CommonAgr.COMMENT_REF)
+                .getReference(Common.RESTAURANT_REF)
+                .child(Common.currentRestaurant.getUid())
+                .child(CommonAgr.COMMENT_REF)
                 .child(Common.selectedFood.getId())
                 .push()
                 .setValue(commentModel)
@@ -397,10 +399,12 @@ public class FoodDetailFragment extends Fragment implements TextWatcher {
 
     private void addRatingToFood(float ratingValue) {
         FirebaseDatabase.getInstance()
-                .getReference(CommonAgr.CATEGORY_REF)
-                .child(Common.categorySelected.getMenu_id()) // Truy xuất nhóm thực đơn
-                .child("foods")  // Truy xuất Danh sách thực đơn
-                .child(Common.selectedFood.getKey()) // Truy suất Thực đơn
+                .getReference(Common.RESTAURANT_REF)
+                .child(Common.currentRestaurant.getUid())
+                .child(CommonAgr.CATEGORY_REF)
+                .child(Common.categorySelected.getMenu_id()) // SELECT CATRGORY
+                .child("foods")  // SELECT Array LIST FOODS OF THIS CATEGORY
+                .child(Common.selectedFood.getKey()) //BECAUSE FOOD ITEM IS ARRAY LIST SO KEY IS INDEX OF ARRAYLIST
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -423,7 +427,6 @@ public class FoodDetailFragment extends Fragment implements TextWatcher {
                             updateData.put("ratingCount", ratingCount);
 
 
-                            //cập nhận dữ liệu
                             foodModel.setRatingValue(sumRating);
                             foodModel.setRatingCount(ratingCount);
 

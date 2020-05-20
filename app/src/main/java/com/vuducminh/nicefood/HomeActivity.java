@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import com.andremion.counterfab.CounterFab;
 
+import com.google.android.gms.common.api.Status;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.libraries.places.api.Places;
@@ -150,7 +151,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         Common.setSpanString("Hey, ",Common.currentUser.getName(),tv_user);
 
         //coutCartItem();
-        //Hidw FAB because in Res list we cant show cart
+        //Hide FAB because in Res list we cant show cart
 
         EventBus.getDefault().postSticky(new HideFABCart(true));
     }
@@ -219,7 +220,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 break;
             }
             case R.id.nav_update_info: {
-                showUpdateInfoDialog();
+
+                    showUpdateInfoDialog();
                 break;
             }
             case R.id.nav_contact_us:{
@@ -245,15 +247,16 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void showUpdateInfoDialog() {
-        androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Update Info");
         builder.setMessage("Please fill information");
 
-        View itemView = LayoutInflater.from(this).inflate(R.layout.layout_register, null);
-        EditText edt_name = (EditText) itemView.findViewById(R.id.et_name);
+        View itemView = LayoutInflater.from(this).inflate(R.layout.layout_update_info, null);
+        EditText edt_name = (EditText) itemView.findViewById(R.id.up_name);
+        EditText edt_address = (EditText) itemView.findViewById(R.id.up_address);
         TextView tv_address_detail = (TextView)itemView.findViewById(R.id.tv_address_detail);
 
-        EditText edt_phone = (EditText) itemView.findViewById(R.id.et_phone);
+        EditText edt_phone = (EditText) itemView.findViewById(R.id.up_phone);
 
         //places_fragment = (AutocompleteSupportFragment)getSupportFragmentManager()
                 //.findFragmentById(R.id.places_autocomplete_fragment);
@@ -273,9 +276,11 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         });**/
 
 
+        edt_name.setText(Common.currentUser.getName());
 
         edt_phone.setText(Common.currentUser.getPhone());
-        tv_address_detail.setText(Common.currentUser.getAddress());
+        edt_address.setText(Common.currentUser.getAddress());
+        //tv_address_detail.setText(Common.currentUser.getAddress());
 
         builder.setView(itemView);
         builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
@@ -285,51 +290,50 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             }
 
         });
-        builder.setPositiveButton("UPDATE", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                if(placeSelected != null) {
-                    if(TextUtils.isEmpty(edt_name.getText().toString())) {
-                        Toast.makeText(HomeActivity.this,"Plaeasr enter your name",Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-
-                    Map<String,Object> update_date = new HashMap<>();
-                    update_date.put("name",edt_name.getText().toString());
-                    update_date.put("address",tv_address_detail.getText().toString());
-                    update_date.put("lat",placeSelected.getLatLng().latitude);
-                    update_date.put("lng",placeSelected.getLatLng().longitude);
-
-                    FirebaseDatabase.getInstance()
-                            .getReference(CommonAgr.USER_REFERENCES)
-                            .child(Common.currentUser.getUid())
-                            .updateChildren(update_date)
-                            .addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    dialog.dismiss();
-                                    Toast.makeText(HomeActivity.this,""+e.getMessage(),Toast.LENGTH_LONG).show();
-                                }
-                            })
-                            .addOnSuccessListener(aVoid -> {
-                                    dialog.dismiss();
-                                Toast.makeText(HomeActivity.this,"Update Info success",Toast.LENGTH_LONG).show();
-                                Common.currentUser.setName(update_date.get("name").toString());
-                                Common.currentUser.setAddress(update_date.get("address").toString());
-                                Common.currentUser.setLat(Double.valueOf(update_date.get("lat").toString()));
-                                Common.currentUser.setLng(Double.valueOf(update_date.get("lng").toString()));
-
-                            });
-                }
+        builder.setPositiveButton("UPDATE", (dialog, which) -> {
+            if (TextUtils.isEmpty(edt_name.getText().toString())) {
+                Toast.makeText(HomeActivity.this, "Please enter your name", Toast.LENGTH_SHORT).show();
             }
+
+            else {
+            Map<String, Object> update_date = new HashMap<>();
+            update_date.put("name", edt_name.getText().toString());
+            update_date.put("address", edt_address.getText().toString());
+            //update_date.put("lat",placeSelected.getLatLng().latitude);
+            //update_date.put("lng",placeSelected.getLatLng().longitude);
+
+            FirebaseDatabase.getInstance()
+                    .getReference(Common.USER_REFERENCES)
+                    .child(Common.currentUser.getUid())
+                    .updateChildren(update_date)
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            dialog.dismiss();
+                            Toast.makeText(HomeActivity.this, "" + e.getMessage(), Toast.LENGTH_LONG).show();
+                        }
+                    })
+
+                    .addOnSuccessListener(aVoid -> {
+                        dialog.dismiss();
+                        Toast.makeText(HomeActivity.this, "Update Info success", Toast.LENGTH_LONG).show();
+                        Common.currentUser.setName(update_date.get("name").toString());
+                        Common.currentUser.setAddress(update_date.get("address").toString());
+                        //Common.currentUser.setLat(Double.valueOf(update_date.get("lat").toString()));
+                        //Common.currentUser.setLng(Double.valueOf(update_date.get("lng").toString()));
+                        finish();
+
+
+                    });
+        }
         });
 
 
         builder.setView(itemView);
-        androidx.appcompat.app.AlertDialog dialog = builder.create();
+        AlertDialog dialog = builder.create();
         dialog.setOnDismissListener(dialog1 -> {
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.remove(places_fragment);
+            //fragmentTransaction.remove(places_fragment);
             fragmentTransaction.commit();
         });
         dialog.show();
@@ -549,7 +553,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
-    // Bắt event counter cart
     @Subscribe(sticky = true,threadMode = ThreadMode.MAIN)
     public void onCartCounter(CountCartEvent event) {
         if(event.isSuccess()) {

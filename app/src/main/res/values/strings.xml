@@ -19,6 +19,8 @@
     <string name="menu_food_list">Food List</string>
 
 
+    <string name="Phone_number">Phone number</string>
+
     <string name="popular_categories">Popular Categories</string>
     <string name="best_deals">Best Deals</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>

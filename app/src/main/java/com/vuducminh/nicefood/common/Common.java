@@ -29,6 +29,7 @@ import com.vuducminh.nicefood.model.TokenModel;
 import com.vuducminh.nicefood.model.UserModel;
 import com.vuducminh.nicefood.R;
 
+
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.List;
@@ -57,23 +58,23 @@ public class Common {
     public static Double calculateExtraPrice(SizeModel userSelectedSize, List<AddonModel> userSelectedAddon) {
         Double result = 0.0;
 
-        // không có size và addon
+
         if (userSelectedSize == null && userSelectedAddon == null) {
             return 0.0;
         }
-        // Không có size
+
         else if (userSelectedSize == null) {
             for (AddonModel addonModel : userSelectedAddon) {
                 result += addonModel.getPrice();
             }
             return result;
         }
-        //Không có addon
+
         else if (userSelectedAddon == null) {
             return userSelectedSize.getPrice() * 1.0;
         }
 
-        // Có đủ cả 2
+
         else {
             result = userSelectedSize.getPrice() * 1.0;
             for (AddonModel addonModel : userSelectedAddon) {
@@ -95,7 +96,7 @@ public class Common {
 
     public static String creteOrderNumber() {
         return new StringBuilder()
-                .append(System.currentTimeMillis())        // Get current time in mini giây
+                .append(System.currentTimeMillis())        // Get current time in mini g
                 .append(Math.abs(new Random().nextInt()))  // Add random number to block same order at same time
                 .toString();
 
@@ -154,12 +155,12 @@ public class Common {
         if (intent != null) {
             pendingIntent = PendingIntent.getActivity(context, id, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         }
-        String NOTIFICATION_CHANNEL_ID = "minh_vu_nice_food_java";
+        String NOTIFICATION_CHANNEL_ID = "dimits_mahalla_delivery_java";
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel notificationChannel = new NotificationChannel(NOTIFICATION_CHANNEL_ID,
-                    "Nice Food Java", NotificationManager.IMPORTANCE_DEFAULT);
-            notificationChannel.setDescription("Nice Food Java");
+                    "Mahalla Delivery", NotificationManager.IMPORTANCE_DEFAULT);
+            notificationChannel.setDescription("Mahalla Delivery");
             notificationChannel.enableLights(true);
             notificationChannel.setLightColor(Color.RED);
             notificationChannel.setVibrationPattern(new long[]{0, 1000, 500, 1000});
@@ -196,4 +197,6 @@ public class Common {
     public static String createTopicOrder() {
         return new StringBuilder("/topics/new_order").toString();
     }
+
+
 }

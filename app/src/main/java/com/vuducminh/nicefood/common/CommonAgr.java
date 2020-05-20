@@ -21,4 +21,5 @@ public class CommonAgr {
     public static final String NOTI_CONTENT = "content";
     public static final String TOKEN_REF = "Tokens";
     public static final String URL_FCM = "https://fom.googleapis.com/";
+
 }
