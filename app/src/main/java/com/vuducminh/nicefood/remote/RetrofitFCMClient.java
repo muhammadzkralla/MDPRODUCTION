@@ -1,5 +1,6 @@
 package com.vuducminh.nicefood.remote;
 
+import com.vuducminh.nicefood.common.Common;
 import com.vuducminh.nicefood.common.CommonAgr;
 
 import retrofit2.Retrofit;
@@ -11,11 +12,13 @@ public class RetrofitFCMClient {
     public static Retrofit getInstance() {
         if(instance == null){
             instance = new Retrofit.Builder()
-                    .baseUrl(CommonAgr.URL_FCM)
+                    .baseUrl("https://fcm.googleapis.com/")
                     .addConverterFactory(GsonConverterFactory.create())
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .build();
         }
         return instance;
     }
+
+
 }

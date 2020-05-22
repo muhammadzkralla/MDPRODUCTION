@@ -46,7 +46,7 @@ public class ContactUs extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent emailIntent = new Intent(Intent.ACTION_SEND);
-                emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{"dimits.m11@gmail.com"});
+                emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{"mahalladelivery@gmail.com"});
                 emailIntent.putExtra(Intent.EXTRA_CC, new String[]{""});
 
                 emailIntent.putExtra(Intent.EXTRA_SUBJECT, "");

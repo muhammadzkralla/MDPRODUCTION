@@ -31,6 +31,7 @@ public class FoodDetailViewModel extends ViewModel {
         if(modelMutableLiveDataFoodModel == null) {
             modelMutableLiveDataFoodModel = new MutableLiveData<>();
         }
+
         modelMutableLiveDataFoodModel.setValue(Common.selectedFood);
         return modelMutableLiveDataFoodModel;
     }

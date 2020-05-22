@@ -22,6 +22,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -310,12 +311,7 @@ public class FoodDetailFragment extends Fragment implements TextWatcher {
 
         initViews();
 
-        foodDetailViewModel.getModelMutableLiveDataFoodModel().observe(this, new Observer<FoodModel>() {
-            @Override
-            public void onChanged(FoodModel foodModel) {
-                displayInfo(foodModel);
-            }
-        });
+        foodDetailViewModel.getModelMutableLiveDataFoodModel().observe(this, this::displayInfo);
 
         foodDetailViewModel.getModelMutableLiveDataCommentModel().observe(this, new Observer<CommentModel>() {
             @Override
@@ -569,5 +565,7 @@ public class FoodDetailFragment extends Fragment implements TextWatcher {
         EventBus.getDefault().postSticky(new MenuItemBack());
         super.onDestroy();
     }
+
+
 
 }

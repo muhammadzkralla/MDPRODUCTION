@@ -1,7 +1,9 @@
 package com.vuducminh.nicefood.ui.cart;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.location.Address;
@@ -27,6 +29,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -38,6 +41,8 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.braintreepayments.api.dropin.DropInResult;
+import com.braintreepayments.api.models.PaymentMethodNonce;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
@@ -71,10 +76,15 @@ import com.vuducminh.nicefood.eventbus.CountCartEvent;
 import com.vuducminh.nicefood.eventbus.HideFABCart;
 import com.vuducminh.nicefood.eventbus.MenuItemBack;
 import com.vuducminh.nicefood.eventbus.UpdateItemInCart;
+import com.vuducminh.nicefood.model.BraintreeTransaction;
+import com.vuducminh.nicefood.model.FCMservice.FCMResponse;
 import com.vuducminh.nicefood.model.FCMservice.FCMSendData;
+
 
 import com.vuducminh.nicefood.model.OrderModel;
 import com.vuducminh.nicefood.R;
+
+import com.vuducminh.nicefood.model.TokenModel;
 
 import com.vuducminh.nicefood.remote.ICloudFunction;
 import com.vuducminh.nicefood.remote.IFCMService;
@@ -105,6 +115,7 @@ import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
 import io.reactivex.observers.DisposableSingleObserver;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Call;
@@ -126,11 +137,14 @@ public class CartFragment extends Fragment implements ILoadTimeFromFirebaseListe
     FusedLocationProviderClient fusedLocationProviderClient;
     Location currentLocation;
 
+    IFCMService ifcmService;
+
+
     String address, comment;
 
     //    ICloudFunction iCloudFunction;
     ILoadTimeFromFirebaseListener iLoadTimeListener;
-    IFCMService ifcmService;
+
 
     @BindView(R.id.recycler_cart)
     RecyclerView recycler_cart;
@@ -148,6 +162,7 @@ public class CartFragment extends Fragment implements ILoadTimeFromFirebaseListe
             Place.Field.NAME,
             Place.Field.ADDRESS,
             Place.Field.LAT_LNG);
+    private ICloudFunction iCloudFunction;
 
     @OnClick(R.id.btn_place_order)
     void onPlaceOrderClick() {
@@ -167,34 +182,31 @@ public class CartFragment extends Fragment implements ILoadTimeFromFirebaseListe
 
 
         //places_fragment = (AutocompleteSupportFragment)getActivity().getSupportFragmentManager()
-             //   .findFragmentById(R.id.places_autocomplete_fragment);
+        //   .findFragmentById(R.id.places_autocomplete_fragment);
 
-       /** places_fragment.setPlaceFields(placeFields);
-        places_fragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
-            @Override
-            public void onPlaceSelected(@NonNull Place place) {
-                placeSelected = place;
-                tv_address_detail.setText(place.getAddress());
-            }
+        /** places_fragment.setPlaceFields(placeFields);
+         places_fragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
+        @Override public void onPlaceSelected(@NonNull Place place) {
+        placeSelected = place;
+        tv_address_detail.setText(place.getAddress());
+        }
 
-            @Override
-            public void onError(@NonNull Status status) {
-                Toast.makeText(getContext(),""+status.getStatusMessage(),Toast.LENGTH_SHORT).show();
-            }
+        @Override public void onError(@NonNull Status status) {
+        Toast.makeText(getContext(),""+status.getStatusMessage(),Toast.LENGTH_SHORT).show();
+        }
         });**/
 
 
         tv_address_detail.setText(Common.currentUser.getAddress());
 
-       /** rdi_home.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    tv_address_detail.setText(Common.currentUser.getAddress());
-                    tv_address_detail.setVisibility(View.VISIBLE);
-                    places_fragment.setHint(Common.currentUser.getAddress());
-                }
-            }
+        /** rdi_home.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        @Override public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        if (isChecked) {
+        tv_address_detail.setText(Common.currentUser.getAddress());
+        tv_address_detail.setVisibility(View.VISIBLE);
+        places_fragment.setHint(Common.currentUser.getAddress());
+        }
+        }
         });**/
         rdi_other_address.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -236,8 +248,6 @@ public class CartFragment extends Fragment implements ILoadTimeFromFirebaseListe
     }
 
 
-
-
     private MyCartAdapter adapter;
 
     private Unbinder unbinder;
@@ -247,9 +257,10 @@ public class CartFragment extends Fragment implements ILoadTimeFromFirebaseListe
                              ViewGroup container, Bundle savedInstanceState) {
 
 
-        Objects.requireNonNull((AppCompatActivity)getActivity()).getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.colorGold3)));
+        Objects.requireNonNull((AppCompatActivity) getActivity()).getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.colorGold3)));
         Window window = getActivity().getWindow();
         window.setStatusBarColor(getResources().getColor(R.color.colorGold4));
+
 
         cartViewModel =
                 ViewModelProviders.of(this).get(CartViewModel.class);
@@ -283,8 +294,6 @@ public class CartFragment extends Fragment implements ILoadTimeFromFirebaseListe
         initLocation();
         return root;
     }
-
-
 
 
     private void initViews() {
@@ -339,7 +348,7 @@ public class CartFragment extends Fragment implements ILoadTimeFromFirebaseListe
     }
 
     private void initPlaceView() {
-        Places.initialize(getContext(),getString(R.string.google_maps_key));
+        Places.initialize(getContext(), getString(R.string.google_maps_key));
         placesClient = Places.createClient(getContext());
     }
 
@@ -520,7 +529,7 @@ public class CartFragment extends Fragment implements ILoadTimeFromFirebaseListe
 
                     @Override
                     public void onError(Throwable e) {
-                        if(!e.getMessage().contains("Query returned empty result set")) {
+                        if (!e.getMessage().contains("Query returned empty result set")) {
                             Toast.makeText(getContext(), "" + e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -594,7 +603,7 @@ public class CartFragment extends Fragment implements ILoadTimeFromFirebaseListe
 
                             @Override
                             public void onError(Throwable e) {
-                                if(!e.getMessage().contains("Query returned empty result set")) {
+                                if (!e.getMessage().contains("Query returned empty result set")) {
                                     Toast.makeText(getContext(), "" + e.getMessage(), Toast.LENGTH_SHORT).show();
                                 }
 
@@ -640,7 +649,7 @@ public class CartFragment extends Fragment implements ILoadTimeFromFirebaseListe
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 cartDataSource.cleanCart(Common.currentUser.getUid(),
-                         Common.currentRestaurant.getUid())
+                        Common.currentRestaurant.getUid())
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(new SingleObserver<Integer>() {
@@ -651,6 +660,7 @@ public class CartFragment extends Fragment implements ILoadTimeFromFirebaseListe
 
                             @Override
                             public void onSuccess(Integer integer) {
+
                                 Map<String, String> notiData = new HashMap<>();
                                 notiData.put(CommonAgr.NOTI_TITLE, "New OrderModel");
                                 notiData.put(CommonAgr.NOTI_CONTENT, "You have new orderModel from " + Common.currentUser.getPhone());
@@ -661,13 +671,14 @@ public class CartFragment extends Fragment implements ILoadTimeFromFirebaseListe
                                         .subscribeOn(Schedulers.io())
                                         .observeOn(AndroidSchedulers.mainThread())
                                         .subscribe(fcmResponse -> {
-                                            //Clean
+                                            // clean sucess
                                             Toast.makeText(getContext(), "OrderModel placed Successfully", Toast.LENGTH_SHORT).show();
                                             EventBus.getDefault().postSticky(new CountCartEvent(true));
                                         }, throwable -> {
                                             Toast.makeText(getContext(), "OrderModel was sent but failure to send notification", Toast.LENGTH_SHORT).show();
                                             EventBus.getDefault().postSticky(new CountCartEvent(true));
                                         }));
+
 
                             }
 
@@ -679,6 +690,7 @@ public class CartFragment extends Fragment implements ILoadTimeFromFirebaseListe
             }
         });
     }
+
 
     @Override
     public void onLoadTimeSuccess(OrderModel orderModel, long estimateTimeInMs) {
@@ -693,85 +705,86 @@ public class CartFragment extends Fragment implements ILoadTimeFromFirebaseListe
     }
 
 
-//    @Override
-//    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//        if(requestCode == REQUEST_BAINTREE_CODE && resultCode == Activity.RESULT_OK) {
-//            DropInResult result = data.getParcelableExtra(DropInResult.EXTRA_DROP_IN_RESULT);
-//            PaymentMethodNonce nonce = result.getPaymentMethodNonce();
-//
-//            // calculate sum cart
-//            cartDataSource.sumPriceInCart(Common.currentUser.getUid())
-//                    .subscribeOn(Schedulers.io())
-//                    .observeOn(AndroidSchedulers.mainThread())
-//                    .subscribe(new SingleObserver<Double>() {
-//                        @Override
-//                        public void onSubscribe(Disposable d) {
-//
-//                        }
-//
-//                        @Override
-//                        public void onSuccess(Double totalPrice) {
-//
-//                            // Get all item in cart to create order
-//                            compositeDisposable.add(cartDataSource.getAllCart(Common.currentUser.getUid())
-//                            .subscribeOn(Schedulers.io())
-//                            .observeOn(AndroidSchedulers.mainThread())
-//                            .subscribe(new Consumer<List<CartItem>>() {
-//                                @Override
-//                                public void accept(List<CartItem> cartItems) throws Exception {
-//                                    //Submit payment
-//                                    compositeDisposable.add(iCloudFunction.submitPayment(totalPrice,
-//                                            nonce.getNonce())
-//                                    .subscribeOn(Schedulers.io())
-//                                    .observeOn(AndroidSchedulers.mainThread())
-//                                    .subscribe(new Consumer<BraintreeTransaction>() {
-//                                        @Override
-//                                        public void accept(BraintreeTransaction braintreeTransaction) throws Exception {
-//                                            if(braintreeTransaction.isSuccess()) {
-//                                                double finalPrice = totalPrice; // We will modify formuls discount late
-//                                                OrderModel order = new OrderModel();
-//                                                order.setUserId(Common.currentUser.getUid());
-//                                                order.setUserName(Common.currentUser.getName());
-//                                                order.setUserPhone(Common.currentUser.getPhone());
-//                                                order.setShippingAddress(address);
-//                                                order.setCommet(comment);
-//
-//                                                if(currentLocation != null) {
-//                                                    order.setLat(currentLocation.getLatitude());
-//                                                    order.setLng(currentLocation.getLongitude());
-//                                                }
-//                                                else {
-//                                                    order.setLat(-0.1f);
-//                                                    order.setLng(-0.1f);
-//                                                }
-//
-//                                                order.setCartItemList(cartItems);
-//                                                order.setTotalPayment(totalPrice);
-//                                                order.setDiscount(0);
-//                                                order.setFinalPayment(finalPrice);
-//                                                order.setCod(false);
-//                                                order.setTransactionId(braintreeTransaction.getTransaction().getId());
-//
-//                                                // Submit this order object to Firebase
-//                                                writeOrderToFireBase(order);
-//                                            }
-//                                        }
-//                                    },throwable -> {
-//                                        Toast.makeText(getContext(),""+throwable.getMessage(),Toast.LENGTH_SHORT).show();
-//                                    }));
-//                                }
-//                            },throwable -> {
-//                                Toast.makeText(getContext(),""+throwable.getMessage(),Toast.LENGTH_SHORT).show();
-//
-//                            }));
-//                        }
-//
-//                        @Override
-//                        public void onError(Throwable e) {
-//                            Toast.makeText(getContext(),""+e.getMessage(),Toast.LENGTH_SHORT).show();
-//                        }
-//                    });
-//        }
-//    }
+
+      @Override
+     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == REQUEST_BAINTREE_CODE && resultCode == Activity.RESULT_OK) {
+            DropInResult result = data.getParcelableExtra(DropInResult.EXTRA_DROP_IN_RESULT);
+            PaymentMethodNonce nonce = result.getPaymentMethodNonce();
+
+            // calculate sum cart
+            cartDataSource.sumPriceInCart(Common.currentUser.getUid(),Common.currentRestaurant.getUid())
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new SingleObserver<Double>() {
+                        @Override
+                        public void onSubscribe(Disposable d) {
+
+                        }
+
+                        @Override
+                        public void onSuccess(Double totalPrice) {
+
+                            // Get all item in cart to create order
+                            compositeDisposable.add(cartDataSource.getAllCart(Common.currentUser.getUid(),Common.currentRestaurant.getUid())
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe(new Consumer<List<CartItem>>() {
+                                @Override
+                                public void accept(List<CartItem> cartItems) throws Exception {
+                                    //Submit payment
+                                    compositeDisposable.add(iCloudFunction.submitPayment(totalPrice,
+                                            nonce.getNonce())
+                                    .subscribeOn(Schedulers.io())
+                                    .observeOn(AndroidSchedulers.mainThread())
+                                    .subscribe(new Consumer<BraintreeTransaction>() {
+                                        @Override
+                                        public void accept(BraintreeTransaction braintreeTransaction) throws Exception {
+                                            if(braintreeTransaction.isSuccess()) {
+                                                double finalPrice = totalPrice; // We will modify formuls discount late
+                                                OrderModel order = new OrderModel();
+                                                order.setUserId(Common.currentUser.getUid());
+                                                order.setUserName(Common.currentUser.getName());
+                                                order.setUserPhone(Common.currentUser.getPhone());
+                                                order.setShippingAddress(address);
+                                                order.setCommet(comment);
+
+                                                if(currentLocation != null) {
+                                                    order.setLat(currentLocation.getLatitude());
+                                                    order.setLng(currentLocation.getLongitude());
+                                                }
+                                                else {
+                                                    order.setLat(-0.1f);
+                                                    order.setLng(-0.1f);
+                                                 }
+
+                                                order.setCartItemList(cartItems);
+                                                order.setTotalPayment(totalPrice);
+                                                order.setDiscount(0);
+                                                order.setFinalPayment(finalPrice);
+                                                order.setCod(false);
+                                                order.setTransactionId(braintreeTransaction.getTransaction().getId());
+
+                                                // Submit this order object to Firebase
+                                                writeOrderToFireBase(order);
+                                            }
+                                        }
+                                    },throwable -> {
+                                        Toast.makeText(getContext(),""+throwable,Toast.LENGTH_SHORT).show();
+                                    }));
+                                }
+                            },throwable -> {
+                                Toast.makeText(getContext(),""+throwable.getMessage(),Toast.LENGTH_SHORT).show();
+
+                            }));
+                        }
+
+                        @Override
+                        public void onError(Throwable e) {
+                            Toast.makeText(getContext(),""+e.getMessage(),Toast.LENGTH_SHORT).show();
+                        }
+                    });
+       }
+    }
 }

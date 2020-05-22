@@ -8,6 +8,7 @@ public class FCMResponse {
     private List<FCMResult> result;
     private long message_id;
 
+
     public FCMResponse() {
     }
 

@@ -2,6 +2,7 @@ package com.vuducminh.nicefood;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 
 import com.andremion.counterfab.CounterFab;
@@ -23,6 +24,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
@@ -34,8 +36,11 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.vuducminh.nicefood.common.Common;
 import com.vuducminh.nicefood.common.CommonAgr;
 import com.vuducminh.nicefood.database.CartDataSource;
@@ -51,8 +56,11 @@ import com.vuducminh.nicefood.eventbus.MenuItemBack;
 import com.vuducminh.nicefood.eventbus.MenuItemEvent;
 import com.vuducminh.nicefood.eventbus.PopluarCategoryClick;
 import com.vuducminh.nicefood.model.CategoryModel;
+import com.vuducminh.nicefood.model.FCMservice.FCMResponse;
+import com.vuducminh.nicefood.model.FCMservice.FCMSendData;
 import com.vuducminh.nicefood.model.FoodModel;
-import com.vuducminh.nicefood.model.UserModel;
+import com.vuducminh.nicefood.model.TokenModel;
+
 
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -82,6 +90,9 @@ import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -154,7 +165,11 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         //Hide FAB because in Res list we cant show cart
 
         EventBus.getDefault().postSticky(new HideFABCart(true));
+
+
     }
+
+
 
     private void initPlaceClient() {
         Places.initialize(this,getString(R.string.google_maps_key));
@@ -322,7 +337,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                         //Common.currentUser.setLat(Double.valueOf(update_date.get("lat").toString()));
                         //Common.currentUser.setLng(Double.valueOf(update_date.get("lng").toString()));
                         finish();
-
 
                     });
         }
@@ -543,6 +557,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                     });
         }
     }
+
+
 
     @Subscribe(sticky = true,threadMode = ThreadMode.MAIN)
     private void countCartAgain(CountCartEvent event) {

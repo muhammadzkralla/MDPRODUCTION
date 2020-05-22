@@ -3,6 +3,7 @@ package com.vuducminh.nicefood.model;
 public class TokenModel {
     private String phone,token;
 
+
     public TokenModel() {
     }
 
@@ -26,4 +27,5 @@ public class TokenModel {
     public void setToken(String token) {
         this.token = token;
     }
+
 }

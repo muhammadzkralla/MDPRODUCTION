@@ -28,6 +28,8 @@ import com.vuducminh.nicefood.model.SizeModel;
 import com.vuducminh.nicefood.model.TokenModel;
 import com.vuducminh.nicefood.model.UserModel;
 import com.vuducminh.nicefood.R;
+import com.vuducminh.nicefood.remote.IFCMService;
+import com.vuducminh.nicefood.remote.RetrofitFCMClient;
 
 
 import java.math.RoundingMode;
@@ -45,6 +47,7 @@ public class Common {
     public static String currentToken = "";
     public static final String RESTAURANT_REF = "Restaurant";
     public static RestaurantModel currentRestaurant;
+
 
     public static String formatPrice(double price) {
         if (price != 0) {
@@ -152,9 +155,8 @@ public class Common {
 
     public static void showNotification(Context context, int id, String title, String content, Intent intent) {
         PendingIntent pendingIntent = null;
-        if (intent != null) {
+        if (intent != null)
             pendingIntent = PendingIntent.getActivity(context, id, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        }
         String NOTIFICATION_CHANNEL_ID = "dimits_mahalla_delivery_java";
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -177,9 +179,9 @@ public class Common {
                 .setSmallIcon(R.mipmap.ic_launcher_round)
                 .setLargeIcon(BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_restaurant_menu_black_24dp));
 
-        if (pendingIntent != null) {
+        if (pendingIntent != null)
             builder.setContentIntent(pendingIntent);
-        }
+
         Notification notification = builder.build();
         notificationManager.notify(id, notification);
     }
@@ -195,7 +197,11 @@ public class Common {
     }
 
     public static String createTopicOrder() {
-        return new StringBuilder("/topics/new_order").toString();
+        return new StringBuilder("topics")
+                .append(Common.currentRestaurant.getUid())
+                .append("_")
+                .append("new_order")
+                .toString();
     }
 
 
