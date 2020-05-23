@@ -398,7 +398,7 @@ public class CartFragment extends Fragment implements ILoadTimeFromFirebaseListe
 
                     @Override
                     public void onError(Throwable e) {
-                        if (!e.getMessage().contains("Query returned empty")) {
+                        if (!e.getMessage().contains("Query returned empty result set")) {
                             Toast.makeText(getContext(), "" + e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -662,7 +662,7 @@ public class CartFragment extends Fragment implements ILoadTimeFromFirebaseListe
                             public void onSuccess(Integer integer) {
 
                                 Map<String, String> notiData = new HashMap<>();
-                                notiData.put(CommonAgr.NOTI_TITLE, "New OrderModel");
+                                notiData.put(CommonAgr.NOTI_TITLE, "New Order");
                                 notiData.put(CommonAgr.NOTI_CONTENT, "You have new orderModel from " + Common.currentUser.getPhone());
 
                                 FCMSendData sendData = new FCMSendData(Common.createTopicOrder(), notiData);

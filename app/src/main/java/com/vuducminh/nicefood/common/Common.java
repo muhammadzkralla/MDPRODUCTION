@@ -155,14 +155,15 @@ public class Common {
 
     public static void showNotification(Context context, int id, String title, String content, Intent intent) {
         PendingIntent pendingIntent = null;
-        if (intent != null)
+        if (intent != null) {
             pendingIntent = PendingIntent.getActivity(context, id, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        String NOTIFICATION_CHANNEL_ID = "dimits_mahalla_delivery_java";
+        }
+        String NOTIFICATION_CHANNEL_ID = "minh_vu_nice_food_java";
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel notificationChannel = new NotificationChannel(NOTIFICATION_CHANNEL_ID,
-                    "Mahalla Delivery", NotificationManager.IMPORTANCE_DEFAULT);
-            notificationChannel.setDescription("Mahalla Delivery");
+                    "Nice Food Java", NotificationManager.IMPORTANCE_DEFAULT);
+            notificationChannel.setDescription("Nice Food Java");
             notificationChannel.enableLights(true);
             notificationChannel.setLightColor(Color.RED);
             notificationChannel.setVibrationPattern(new long[]{0, 1000, 500, 1000});
@@ -179,13 +180,12 @@ public class Common {
                 .setSmallIcon(R.mipmap.ic_launcher_round)
                 .setLargeIcon(BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_restaurant_menu_black_24dp));
 
-        if (pendingIntent != null)
+        if (pendingIntent != null) {
             builder.setContentIntent(pendingIntent);
-
+        }
         Notification notification = builder.build();
         notificationManager.notify(id, notification);
     }
-
     public static void updateToken(Context context, String newToken) {
         FirebaseDatabase.getInstance()
                 .getReference(CommonAgr.TOKEN_REF)
@@ -197,7 +197,11 @@ public class Common {
     }
 
     public static String createTopicOrder() {
-        return new StringBuilder("/topics/new_order").toString();
+        return new StringBuilder("/topics/")
+                .append(Common.currentRestaurant.getUid())
+                .append("_")
+                .append("new_order")
+                .toString();
     }
 
 

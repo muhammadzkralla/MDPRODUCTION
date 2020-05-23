@@ -127,7 +127,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-
+        updatToken();
 
         initPlaceClient();
 
@@ -168,6 +168,14 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
 
     }
+    private void updatToken() {
+        FirebaseInstanceId.getInstance()
+                .getInstanceId().addOnFailureListener(e -> Toast.makeText(HomeActivity.this,""+e.getMessage(),Toast.LENGTH_SHORT).show())
+                .addOnSuccessListener(instanceIdResult -> {
+                    Common.updateToken(HomeActivity.this,instanceIdResult.getToken());
+                });
+    }
+
 
 
 
