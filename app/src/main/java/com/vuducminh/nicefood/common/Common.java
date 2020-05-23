@@ -197,11 +197,7 @@ public class Common {
     }
 
     public static String createTopicOrder() {
-        return new StringBuilder("topics")
-                .append(Common.currentRestaurant.getUid())
-                .append("_")
-                .append("new_order")
-                .toString();
+        return new StringBuilder("/topics/new_order").toString();
     }
 
 

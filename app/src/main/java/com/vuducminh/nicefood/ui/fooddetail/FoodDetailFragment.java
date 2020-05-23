@@ -469,24 +469,26 @@ public class FoodDetailFragment extends Fragment implements TextWatcher {
             ratingBar.setRating(foodModel.getRatingValue().floatValue() / foodModel.getRatingCount());
         }
 
-        for (SizeModel sizeModel : Common.selectedFood.getSize()) {
-            RadioButton radioButton = new RadioButton(getContext());
-            radioButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    if (isChecked) {
-                        Common.selectedFood.setUserSelectedSize(sizeModel);
+        if(Common.selectedFood.getSize()!=null) {
+            for (SizeModel sizeModel : Common.selectedFood.getSize()) {
+                RadioButton radioButton = new RadioButton(getContext());
+                radioButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        if (isChecked) {
+                            Common.selectedFood.setUserSelectedSize(sizeModel);
+                        }
+                        calculateTotalPrice();
                     }
-                    calculateTotalPrice();
-                }
-            });
+                });
 
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 1.0f);
-            radioButton.setLayoutParams(params);
-            radioButton.setText(sizeModel.getName());
-            radioButton.setTag(sizeModel.getPrice());
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 1.0f);
+                radioButton.setLayoutParams(params);
+                radioButton.setText(sizeModel.getName());
+                radioButton.setTag(sizeModel.getPrice());
 
-            rdi_group_size.addView(radioButton);
+                rdi_group_size.addView(radioButton);
+            }
         }
 
         if (rdi_group_size.getChildCount() > 0) {

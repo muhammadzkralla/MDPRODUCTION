@@ -29,7 +29,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.iid.FirebaseInstanceId;
 import com.vuducminh.nicefood.HomeActivity;
 import com.vuducminh.nicefood.R;
 import com.vuducminh.nicefood.common.Common;

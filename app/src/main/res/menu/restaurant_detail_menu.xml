@@ -3,6 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
+    <group android:id="@+id/restaurant_group">
+        <item
+            android:id="@+id/nav_restaurant"
+            android:icon="@drawable/ic_home_black_24dp"
+            android:title="@string/menu_restaurant" />
+    </group>
 
 
     <group android:id="@+id/category_group">

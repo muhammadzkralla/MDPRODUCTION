@@ -704,9 +704,9 @@ public class CartFragment extends Fragment implements ILoadTimeFromFirebaseListe
         Toast.makeText(getContext(), "" + message, Toast.LENGTH_SHORT).show();
     }
 
+}
 
-
-      @Override
+  /**    @Override
      public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == REQUEST_BAINTREE_CODE && resultCode == Activity.RESULT_OK) {
@@ -787,4 +787,4 @@ public class CartFragment extends Fragment implements ILoadTimeFromFirebaseListe
                     });
        }
     }
-}
+}**/
