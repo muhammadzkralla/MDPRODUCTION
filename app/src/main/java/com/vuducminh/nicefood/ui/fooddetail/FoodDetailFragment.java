@@ -22,7 +22,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -144,9 +143,6 @@ public class FoodDetailFragment extends Fragment implements TextWatcher {
         cartItem.setFoodImage(Common.selectedFood.getImage());
         cartItem.setFoodPrice(Double.valueOf(String.valueOf(Common.selectedFood.getPrice())));
         cartItem.setFoodQuantity(Integer.valueOf(numberButton.getNumber()));
-        cartItem.setFoodExtraPrice(Common.calculateExtraPrice(Common.selectedFood.getUserSelectedSize()
-                ,Common.selectedFood.getUserSelectedAddon()));
-
         if(Common.selectedFood.getUserSelectedAddon() != null) {
             cartItem.setFoodAddon(new Gson().toJson(Common.selectedFood.getUserSelectedAddon()));
         }
@@ -160,6 +156,10 @@ public class FoodDetailFragment extends Fragment implements TextWatcher {
         else {
             cartItem.setFoodSize("Default");
         }
+        cartItem.setFoodExtraPrice(Common.calculateExtraPrice(Common.selectedFood.getUserSelectedSize()
+                ,Common.selectedFood.getUserSelectedAddon()));
+
+
 
         cartDataSource.getItemAllOptionsInCart(Common.currentUser.getUid(),
                 Common.categorySelected.getMenu_id(),
@@ -311,7 +311,12 @@ public class FoodDetailFragment extends Fragment implements TextWatcher {
 
         initViews();
 
-        foodDetailViewModel.getModelMutableLiveDataFoodModel().observe(this, this::displayInfo);
+        foodDetailViewModel.getModelMutableLiveDataFoodModel().observe(this, new Observer<FoodModel>() {
+            @Override
+            public void onChanged(FoodModel foodModel) {
+                displayInfo(foodModel);
+            }
+        });
 
         foodDetailViewModel.getModelMutableLiveDataCommentModel().observe(this, new Observer<CommentModel>() {
             @Override
@@ -468,8 +473,7 @@ public class FoodDetailFragment extends Fragment implements TextWatcher {
         if (foodModel.getRatingCount() != null) {
             ratingBar.setRating(foodModel.getRatingValue().floatValue() / foodModel.getRatingCount());
         }
-
-        if(Common.selectedFood.getSize()!=null) {
+        if (Common.selectedFood.getSize() != null) {
             for (SizeModel sizeModel : Common.selectedFood.getSize()) {
                 RadioButton radioButton = new RadioButton(getContext());
                 radioButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -567,7 +571,5 @@ public class FoodDetailFragment extends Fragment implements TextWatcher {
         EventBus.getDefault().postSticky(new MenuItemBack());
         super.onDestroy();
     }
-
-
 
 }
