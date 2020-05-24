@@ -73,7 +73,7 @@ public class MenuFragment extends Fragment {
             dialog.dismiss();
             adapter = new MyCategoriesAdapter(getContext(),categoryModels);
             recycler_menu.setAdapter(adapter);
-            recycler_menu.setLayoutAnimation(layoutAnimationController);
+            //recycler_menu.setLayoutAnimation(layoutAnimationController);
         });
         return root;
     }
@@ -83,7 +83,7 @@ public class MenuFragment extends Fragment {
 
         dialog = new SpotsDialog.Builder().setContext(getContext()).setCancelable(false).build();
         dialog.show();
-        layoutAnimationController = AnimationUtils.loadLayoutAnimation(getContext(),R.anim.layout_item_from_left);
+        //layoutAnimationController = AnimationUtils.loadLayoutAnimation(getContext(),R.anim.layout_item_from_left);
         GridLayoutManager layoutManager = new GridLayoutManager(getContext(),2);
         layoutManager.setOrientation(RecyclerView.VERTICAL);
         layoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {

@@ -26,7 +26,7 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="menu_slideshow">Slideshow</string>
-    <string name="menu_menu">Categories</string>
+    <string name="menu_menu">Menu</string>
     <string name="menu_view_orders">View Orders</string>
 
     <string name="size">Size</string>

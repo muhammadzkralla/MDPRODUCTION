@@ -59,7 +59,7 @@ public class FoodListFragment extends Fragment {
            if(foodModels != null) {
                adapter = new MyFoodListAdapter(getContext(),foodModels);
                recycler_food_list.setAdapter(adapter);
-               recycler_food_list.setLayoutAnimation(layoutAnimationController);
+               //recycler_food_list.setLayoutAnimation(layoutAnimationController);
            }
         });
         return root;
@@ -76,7 +76,7 @@ public class FoodListFragment extends Fragment {
         recycler_food_list.setHasFixedSize(true);
         recycler_food_list.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        layoutAnimationController = AnimationUtils.loadLayoutAnimation(getContext(),R.anim.layout_item_from_left);
+        //layoutAnimationController = AnimationUtils.loadLayoutAnimation(getContext(),R.anim.layout_item_from_left);
 
     }
 

@@ -438,7 +438,7 @@ public class FoodDetailFragment extends Fragment implements TextWatcher {
                                         public void onComplete(@NonNull Task<Void> task) {
                                             waitingDialog.dismiss();
                                             if (task.isSuccessful()) {
-                                                Toast.makeText(getContext(), "Thanhk you !", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(getContext(), "Thank you !", Toast.LENGTH_SHORT).show();
                                                 Common.selectedFood = foodModel;
                                                 foodDetailViewModel.setFoodModel(foodModel);  // call refresh
                                             }

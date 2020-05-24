@@ -672,7 +672,7 @@ public class CartFragment extends Fragment implements ILoadTimeFromFirebaseListe
                                         .observeOn(AndroidSchedulers.mainThread())
                                         .subscribe(fcmResponse -> {
                                             // clean sucess
-                                            Toast.makeText(getContext(), "OrderModel placed Successfully", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(getContext(), "Order placed Successfully", Toast.LENGTH_SHORT).show();
                                             EventBus.getDefault().postSticky(new CountCartEvent(true));
                                         }, throwable -> {
                                             Toast.makeText(getContext(), "OrderModel was sent but failure to send notification", Toast.LENGTH_SHORT).show();

@@ -145,6 +145,9 @@ public class Common {
             case 2: {
                 return "Shipped";
             }
+            case 3:{
+                return "preparing";
+            }
             case -1: {
                 return "Cancelled";
             }
@@ -158,12 +161,12 @@ public class Common {
         if (intent != null) {
             pendingIntent = PendingIntent.getActivity(context, id, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         }
-        String NOTIFICATION_CHANNEL_ID = "minh_vu_nice_food_java";
+        String NOTIFICATION_CHANNEL_ID = "Dimits_Mahalla_Delivery";
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel notificationChannel = new NotificationChannel(NOTIFICATION_CHANNEL_ID,
-                    "Nice Food Java", NotificationManager.IMPORTANCE_DEFAULT);
-            notificationChannel.setDescription("Nice Food Java");
+                    "Mahalla_Delivery", NotificationManager.IMPORTANCE_DEFAULT);
+            notificationChannel.setDescription("Mahalla_Delivery");
             notificationChannel.enableLights(true);
             notificationChannel.setLightColor(Color.RED);
             notificationChannel.setVibrationPattern(new long[]{0, 1000, 500, 1000});
