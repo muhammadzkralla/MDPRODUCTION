@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -50,9 +51,13 @@ public class MyRestaurantAdapter extends RecyclerView.Adapter<MyRestaurantAdapte
 
         //event
         holder.setListener((view, pos) -> {
-            Common.currentRestaurant = restaurantModelList.get(pos);
-            EventBus.getDefault().postSticky(new MenuItemEvent(true,restaurantModelList.get(pos)));
-        });
+                    if (restaurantModelList.get(pos).getActive().equals("1")) {
+                        Common.currentRestaurant = restaurantModelList.get(pos);
+                        EventBus.getDefault().postSticky(new MenuItemEvent(true, restaurantModelList.get(pos)));
+                    }else
+                        Toast.makeText(context, "Closed", Toast.LENGTH_SHORT).show();
+                }
+        );
     }
 
     @Override

@@ -1,10 +1,18 @@
 package com.vuducminh.nicefood.model;
 
 public class RestaurantModel {
-    private String uid,name,address,paymenUrl,imageUrl,phone;
+    private String uid,name,address,paymenUrl,imageUrl,phone,active;
 
     public RestaurantModel(){
 
+    }
+
+    public String getActive() {
+        return active;
+    }
+
+    public void setActive(String active) {
+        this.active = active;
     }
 
     public String getUid() {
