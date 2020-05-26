@@ -18,6 +18,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -27,6 +29,7 @@ import com.vuducminh.nicefood.common.Common;
 import com.vuducminh.nicefood.eventbus.MenuItemBack;
 import com.vuducminh.nicefood.model.FoodModel;
 import com.vuducminh.nicefood.R;
+import com.vuducminh.nicefood.ui.menu.MenuFragment;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -50,6 +53,7 @@ public class FoodListFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
+
         foodListViewModel =
                 ViewModelProviders.of(this).get(FoodListViewModel.class);
         View root = inflater.inflate(R.layout.fragment_food_list, container, false);
@@ -137,5 +141,7 @@ public class FoodListFragment extends Fragment {
         EventBus.getDefault().postSticky(new MenuItemBack());
         super.onDestroy();
     }
+
+
 
 }

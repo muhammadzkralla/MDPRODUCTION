@@ -159,7 +159,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         View headerView = navigationView.getHeaderView(0);
         TextView tv_user = (TextView) headerView.findViewById(R.id.tv_user);
-        Common.setSpanString("Hey, ",Common.currentUser.getName(),tv_user);
+        Common.setSpanString("Welcome , ",Common.currentUser.getName(),tv_user);
 
         //coutCartItem();
         //Hide FAB because in Res list we cant show cart
