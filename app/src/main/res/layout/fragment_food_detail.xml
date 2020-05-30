@@ -98,11 +98,13 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
-                        <ImageView
+                        <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:src="@drawable/ic_attach_money_black_24dp" />
+                            android:textColor="@android:color/black"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:text="L.E" />
 
                         <TextView
                             android:id="@+id/food_prices"
@@ -111,6 +113,7 @@
                             android:layout_weight="9"
                             android:fontFamily="@font/brandon_medium"
                             android:text="1,000"
+                            android:layout_marginLeft="4dp"
                             android:textColor="@color/colorPrimary"
                             android:textSize="18sp"
                             android:textStyle="bold" />

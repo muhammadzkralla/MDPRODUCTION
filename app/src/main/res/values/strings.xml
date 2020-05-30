@@ -18,7 +18,7 @@
     <string name="menu_cart">Cart</string>
     <string name="menu_food_list">Food List</string>
 
-
+    <string name="warn"> if you want to change your number you have to make a new account</string>
     <string name="Phone_number">Phone number</string>
 
     <string name="popular_categories">Popular Categories</string>
