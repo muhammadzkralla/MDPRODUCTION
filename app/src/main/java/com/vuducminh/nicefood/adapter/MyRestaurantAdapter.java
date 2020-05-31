@@ -49,6 +49,11 @@ public class MyRestaurantAdapter extends RecyclerView.Adapter<MyRestaurantAdapte
         holder.txt_restaurant_name.setText(new StringBuilder(restaurantModelList.get(position).getName()));
         holder.txt_restaurant_address.setText(new StringBuilder(restaurantModelList.get(position).getAddress()));
 
+        if (restaurantModelList.get(position).getActive().equals("1")) {
+            holder.txt_status.setText("Status : Opened");
+        }else
+            holder.txt_status.setText("Status : Closed !");
+
         //event
         holder.setListener((view, pos) -> {
                     if (restaurantModelList.get(pos).getActive().equals("1")) {
@@ -68,6 +73,8 @@ public class MyRestaurantAdapter extends RecyclerView.Adapter<MyRestaurantAdapte
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         @BindView(R.id.txt_restaurant_name)
         TextView txt_restaurant_name;
+        @BindView(R.id.txt_status)
+        TextView txt_status;
         @BindView(R.id.txt_restaurant_address)
         TextView txt_restaurant_address;
         @BindView(R.id.img_restaurant)
