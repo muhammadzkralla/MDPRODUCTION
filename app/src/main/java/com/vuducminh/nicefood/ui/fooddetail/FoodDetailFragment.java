@@ -92,7 +92,7 @@ public class FoodDetailFragment extends Fragment implements TextWatcher {
     @BindView(R.id.img_food)
     ImageView img_food;
     @BindView(R.id.btnCart)
-    CounterFab btnCart;
+    Button btnCart;
     @BindView(R.id.btn_rating)
     FloatingActionButton btn_rating;
     @BindView(R.id.food_name)
