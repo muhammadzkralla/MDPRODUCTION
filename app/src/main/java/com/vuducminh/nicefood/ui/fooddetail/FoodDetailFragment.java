@@ -1,12 +1,14 @@
 package com.vuducminh.nicefood.ui.fooddetail;
 
 import android.content.DialogInterface;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -60,6 +62,7 @@ import org.greenrobot.eventbus.EventBus;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -304,6 +307,10 @@ public class FoodDetailFragment extends Fragment implements TextWatcher {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
+        Objects.requireNonNull((AppCompatActivity) getActivity()).getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.colorGold3)));
+        Window window = getActivity().getWindow();
+        window.setStatusBarColor(getResources().getColor(R.color.colorGold4));
+
         foodDetailViewModel =
                 ViewModelProviders.of(this).get(FoodDetailViewModel.class);
         View root = inflater.inflate(R.layout.fragment_food_detail, container, false);

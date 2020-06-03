@@ -1,8 +1,10 @@
 package com.vuducminh.nicefood.ui.restaurant;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.app.AlertDialog;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -15,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
 import android.widget.LinearLayout;
@@ -28,6 +31,8 @@ import com.vuducminh.nicefood.eventbus.MenuInflateEvent;
 import com.vuducminh.nicefood.model.RestaurantModel;
 
 import org.greenrobot.eventbus.EventBus;
+
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -51,6 +56,11 @@ public class RestaurantFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
+
+        Objects.requireNonNull((AppCompatActivity) getActivity()).getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.colorGold3)));
+        Window window = getActivity().getWindow();
+        window.setStatusBarColor(getResources().getColor(R.color.colorGold4));
+
         mViewModel = ViewModelProviders.of(this).get(RestaurantViewModel.class);
        View root =  inflater.inflate(R.layout.fragment_restaurant, container, false);
        unbinder = ButterKnife.bind(this,root);

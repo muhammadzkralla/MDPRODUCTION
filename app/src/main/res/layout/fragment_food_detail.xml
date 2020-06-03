@@ -64,6 +64,13 @@
         android:clipToPadding="false"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="20dp"
+            android:layout_marginRight="4sp"
+            android:layout_marginLeft="4sp">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -72,8 +79,8 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardElevation="5dp"
-                app:cardUseCompatPadding="true">
+                android:layout_marginTop="8dp"
+                app:cardCornerRadius="4dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -88,61 +95,9 @@
                         android:fontFamily="@font/brandon_medium"
                         android:padding="12dp"
                         android:text="Name Food"
-                        android:textColor="@color/colorPrimary"
+                        android:textColor="@android:color/black"
                         android:textSize="20sp"
                         android:textStyle="bold" />
-
-                    <LinearLayout
-                        android:id="@+id/layout_price"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:textColor="@android:color/black"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                            android:text="L.E" />
-
-                        <TextView
-                            android:id="@+id/food_prices"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="9"
-                            android:fontFamily="@font/brandon_medium"
-                            android:text="1,000"
-                            android:layout_marginLeft="4dp"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="18sp"
-                            android:textStyle="bold" />
-                    </LinearLayout>
-
-                    <com.cepheuen.elegantnumberbutton.view.ElegantNumberButton
-                        android:id="@+id/number_button"
-                        android:layout_width="100dp"
-                        android:layout_height="30dp"
-                        android:layout_marginLeft="8dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginBottom="18dp"
-                        app:backGroundColor="@color/colorAccent"
-                        app:finalNumber="20"
-                        app:initialNumber="1"
-                        app:textSize="8sp" />
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardElevation="5dp"
-                app:cardUseCompatPadding="true">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
 
                     <RatingBar
                         android:id="@+id/ratingBar"
@@ -150,14 +105,81 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:isIndicator="true"
+                        android:transformPivotX="8sp"
+                        android:transformPivotY="9dp"
                         android:numStars="5"
+                        android:scaleX="0.7"
+                        android:scaleY="0.7"
+                        android:layout_marginLeft="4dp"
                         android:stepSize="0.1" />
+
+                    <LinearLayout
+                        android:id="@+id/layout_price"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <com.cepheuen.elegantnumberbutton.view.ElegantNumberButton
+                            android:id="@+id/number_button"
+                            android:layout_width="100dp"
+                            android:layout_height="35dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="18dp"
+                            app:textColor="@android:color/black"
+                            app:backGroundColor="@android:color/white"
+                            app:finalNumber="20"
+                            app:initialNumber="1"
+                            app:textSize="8sp" />
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="26sp"
+                            android:text="L.E "
+                            android:layout_marginLeft="10dp"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:textColor="@android:color/black"
+                            android:layout_marginTop="2sp"/>
+
+                        <TextView
+                            android:id="@+id/food_prices"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/brandon_medium"
+                            android:text="1,000"
+                            android:layout_marginRight="10dp"
+                            android:textColor="@android:color/black"
+                            android:textSize="26sp"
+                            android:textStyle="bold"
+                            android:layout_marginTop="2sp"/>
+
+
+
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardElevation="5dp"
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/food_description"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
                         android:fontFamily="@font/brandon_medium"
                         android:lineSpacingMultiplier="1.5"
                         android:padding="12dp"
@@ -174,8 +196,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="8dp"
-                app:cardElevation="5dp"
-                app:cardUseCompatPadding="true">
+                app:cardElevation="5dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -204,7 +225,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardElevation="5dp"
-                app:cardUseCompatPadding="true">
+                >
 
 
                 <LinearLayout
@@ -257,5 +278,7 @@
                 android:textColor="@android:color/white"
                 app:cornerRadius="4dp" />
         </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
     </androidx.core.widget.NestedScrollView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
