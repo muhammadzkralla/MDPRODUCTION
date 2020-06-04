@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -64,7 +65,7 @@ public class MyFoodListAdapter extends RecyclerView.Adapter<MyFoodListAdapter.My
         holder.tv_food_name.setText(new StringBuffer("")
                 .append(foodModelList.get(position).getName()));
 
-        holder.tv_food_price.setText(new StringBuffer("$")
+        holder.tv_food_price.setText(new StringBuffer("EGP ")
                 .append(foodModelList.get(position).getPrice()));
 
         // Event Bus
@@ -189,7 +190,7 @@ public class MyFoodListAdapter extends RecyclerView.Adapter<MyFoodListAdapter.My
 
 
         @BindView(R.id.img_quick_cart)
-        ImageView img_quick_cart;
+        Button img_quick_cart;
 
         IRecyclerClickListener listener;
 
