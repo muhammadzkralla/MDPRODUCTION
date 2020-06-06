@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.asksira.loopingviewpager.LoopingPagerAdapter;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.vuducminh.nicefood.eventbus.BestDealItemClick;
 import com.vuducminh.nicefood.model.BestDealModel;
 import com.vuducminh.nicefood.R;
@@ -43,7 +44,8 @@ public class MyBestdealAdapter extends LoopingPagerAdapter<BestDealModel> {
     protected void bindView(View convertView, int listPosition, int viewType) {
         unbinder = ButterKnife.bind(this,convertView);
 
-        Glide.with(convertView).load(itemList.get(listPosition).getImage()).into(img_best_deal);
+        RequestOptions myOption = new RequestOptions().fitCenter();
+        Glide.with(convertView).load(itemList.get(listPosition).getImage()).apply(myOption).into(img_best_deal);
         tv_best_deal.setText(itemList.get(listPosition).getName());
 
         convertView.setOnClickListener(new View.OnClickListener() {

@@ -46,9 +46,9 @@
             android:text="1,000$"
             android:textStyle="italic"/>
         <Button
-            android:textSize="16sp"
+            android:textSize="12sp"
             android:layout_margin="10dp"
-            android:layout_width="100dp"
+            android:layout_width="95dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:layout_height="30dp"

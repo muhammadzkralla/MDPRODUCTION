@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
+import android.widget.GridLayout;
+import android.widget.HorizontalScrollView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -21,6 +23,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.asksira.loopingviewpager.LoopingViewPager;
+import com.braintreepayments.cardform.OnCardFormSubmitListener;
 import com.vuducminh.nicefood.adapter.MyBestdealAdapter;
 import com.vuducminh.nicefood.adapter.MyCategoriesAdapter;
 import com.vuducminh.nicefood.adapter.MyPopularCategoriesAdapter;
@@ -44,6 +47,8 @@ public class HomeFragment extends Fragment {
     private MenuViewModel menuViewModel;
     //initialize the adapter
     MyCategoriesAdapter adapter;
+
+    GridLayoutManager layoutManager;
 
     Unbinder unbinder;
     //init the views
@@ -84,6 +89,7 @@ public class HomeFragment extends Fragment {
         menuViewModel.getCategoryList().observe(this,categoryModels -> {
             adapter = new MyCategoriesAdapter(getContext(),categoryModels);
             recycler_menu.setAdapter(adapter);
+
         });
 
         homeViewModel.getBestDealList(key).observe(this,bestDealModels -> {
@@ -95,7 +101,7 @@ public class HomeFragment extends Fragment {
 
     private void init() {
         //redesign it
-        GridLayoutManager layoutManager = new GridLayoutManager(getContext(),2);
+        layoutManager = new GridLayoutManager(getContext(),2);
         layoutManager.setOrientation(RecyclerView.VERTICAL);
         layoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
             @Override
