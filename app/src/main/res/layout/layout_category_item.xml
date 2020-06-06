@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="100dp">
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cardCornerRadius="18dp"
+        app:cardElevation="4dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -28,4 +35,6 @@
         android:fontFamily="@font/brandon_medium"
         android:textColor="@android:color/white"
         android:textSize="22sp"/>
+    </androidx.cardview.widget.CardView>
+
 </FrameLayout>

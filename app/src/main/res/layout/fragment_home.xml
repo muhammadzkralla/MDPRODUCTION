@@ -10,41 +10,23 @@
         android:weightSum="5"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Deals"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginLeft="8dp"
+            android:layout_marginBottom="5dp"
+            android:fontFamily="sans-serif-black"
+            android:textColor="#121212"/>
+
 
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="170dp"
-            android:padding="8dp">
+            android:layout_height="160dp">
 
-            <TextView
-                android:textStyle="bold"
-                android:fontFamily="@font/brandon_medium"
-                android:text="@string/popular_categories"
-                android:textSize="24dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_popluar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="200dp">
-
-            <TextView
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="8dp"
-                android:fontFamily="@font/brandon_medium"
-                android:text="@string/best_deals"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="24sp"
-                android:textStyle="bold"/>
 
             <com.asksira.loopingviewpager.LoopingViewPager
                 android:id="@+id/viewpager"
@@ -56,9 +38,43 @@
                 app:viewpagerAspectRatio="1.33"/>
 
         </LinearLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="150dp">
+
+            <TextView
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginLeft="8dp"
+                android:layout_marginBottom="5dp"
+                android:fontFamily="sans-serif-black"
+                android:textColor="#121212"
+                android:text="@string/popular_categories"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_popluar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Menu"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginLeft="8dp"
+            android:layout_marginBottom="5dp"
+            android:fontFamily="sans-serif-black"
+            android:textColor="#121212"/>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_menu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
+
+
     </LinearLayout>
 </ScrollView>
