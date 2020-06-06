@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -96,5 +97,11 @@ public class RestaurantFragment extends Fragment {
         super.onResume();
         EventBus.getDefault().postSticky(new CountCartEvent(true));
         EventBus.getDefault().postSticky(new MenuInflateEvent(false));
+    }
+
+    @Override
+    public void onPrepareOptionsMenu(@NonNull Menu menu) {
+        menu.findItem(R.id.action_settings).setVisible(false);
+
     }
 }
