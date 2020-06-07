@@ -165,11 +165,12 @@ public class Common {
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel notificationChannel = new NotificationChannel(NOTIFICATION_CHANNEL_ID,
-                    "Mahalla_Delivery", NotificationManager.IMPORTANCE_DEFAULT);
+                    "Mahalla_Delivery", NotificationManager.IMPORTANCE_HIGH);
             notificationChannel.setDescription("Mahalla_Delivery");
             notificationChannel.enableLights(true);
+            notificationChannel.setImportance(NotificationManager.IMPORTANCE_HIGH);
             notificationChannel.setLightColor(Color.RED);
-            notificationChannel.setVibrationPattern(new long[]{0, 1000, 500, 1000});
+
             notificationChannel.enableVibration(true);
 
             notificationManager.createNotificationChannel(notificationChannel);
@@ -179,7 +180,9 @@ public class Common {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, NOTIFICATION_CHANNEL_ID);
         builder.setContentTitle(title)
                 .setContentText(content)
-                .setAutoCancel(true)
+                .setAutoCancel(false)
+                .setPriority(Notification.PRIORITY_HIGH)
+                .setDefaults(Notification.DEFAULT_VIBRATE)
                 .setSmallIcon(R.mipmap.ic_launcher_round)
                 .setLargeIcon(BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_restaurant_menu_black_24dp));
 
