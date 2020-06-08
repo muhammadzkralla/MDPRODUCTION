@@ -4,6 +4,7 @@ import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.app.TaskStackBuilder;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
@@ -20,6 +21,7 @@ import android.widget.Toast;
 import androidx.core.app.NotificationCompat;
 
 import com.google.firebase.database.FirebaseDatabase;
+import com.vuducminh.nicefood.MainActivity;
 import com.vuducminh.nicefood.model.AddonModel;
 import com.vuducminh.nicefood.model.CategoryModel;
 import com.vuducminh.nicefood.model.FoodModel;
@@ -157,9 +159,16 @@ public class Common {
     }
 
     public static void showNotification(Context context, int id, String title, String content, Intent intent) {
-        PendingIntent pendingIntent = null;
+        // Create an Intent for the activity you want to start
+        Intent resultIntent = new Intent(context, MainActivity.class);
+        // Create the TaskStackBuilder and add the intent, which inflates the back stack
+        TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
+        stackBuilder.addNextIntentWithParentStack(resultIntent);
+        // Get the PendingIntent containing the entire back stack
+        PendingIntent resultPendingIntent =
+                stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
         if (intent != null) {
-            pendingIntent = PendingIntent.getActivity(context, id, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+            resultPendingIntent = PendingIntent.getActivity(context, id, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         }
         String NOTIFICATION_CHANNEL_ID = "Dimits_Mahalla_Delivery";
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
@@ -186,8 +195,8 @@ public class Common {
                 .setSmallIcon(R.mipmap.ic_launcher_round)
                 .setLargeIcon(BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_restaurant_menu_black_24dp));
 
-        if (pendingIntent != null) {
-            builder.setContentIntent(pendingIntent);
+        if (resultPendingIntent != null) {
+            builder.setContentIntent(resultPendingIntent);
         }
         Notification notification = builder.build();
         notificationManager.notify(id, notification);
