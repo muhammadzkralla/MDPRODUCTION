@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp">
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:scaleType="fitXY"
+            android:id="@+id/img_food_img"
+            android:contentDescription="photo" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="7"
+            android:layout_marginLeft="8dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/txt_food_name"
+                android:text="This is Food"
+                android:textColor="@android:color/holo_blue_light"
+                android:fontFamily="@font/brandon_medium"
+                android:textStyle="italic"
+                android:textSize="16sp"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/txt_food_quantity"
+                android:text="Quantity : 1"
+                android:fontFamily="@font/brandon_medium"
+                android:textStyle="italic"
+                android:textSize="16sp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/text_food_add_on"
+                android:text="AddOn : default"
+                android:fontFamily="@font/brandon_medium"
+                android:textStyle="italic"
+                android:textSize="16sp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/txt_size"
+                android:text="AddOn : default"
+                android:fontFamily="@font/brandon_medium"
+                android:textStyle="italic"
+                android:textSize="16sp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/txt_phone"
+                android:text="AddOn : default"
+                android:fontFamily="@font/brandon_medium"
+                android:textStyle="italic"
+                android:textSize="16sp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/txt_price"
+                android:text="Price : "
+                android:fontFamily="@font/brandon_medium"
+                android:textStyle="italic"
+                android:textSize="16sp"/>
+
+
+
+
+
+
+
+
+
+
+        </LinearLayout>
+
+
+
+
+
+    </LinearLayout>
+
+
+</androidx.cardview.widget.CardView>
