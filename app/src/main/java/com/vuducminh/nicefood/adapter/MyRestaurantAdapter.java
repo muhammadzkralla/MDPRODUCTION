@@ -60,7 +60,7 @@ public class MyRestaurantAdapter extends RecyclerView.Adapter<MyRestaurantAdapte
                         Common.currentRestaurant = restaurantModelList.get(pos);
                         EventBus.getDefault().postSticky(new MenuItemEvent(true, restaurantModelList.get(pos)));
                     }else
-                        Toast.makeText(context, "Closed", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, " Sorry this restaurant is currently Closed !", Toast.LENGTH_SHORT).show();
                 }
         );
     }
