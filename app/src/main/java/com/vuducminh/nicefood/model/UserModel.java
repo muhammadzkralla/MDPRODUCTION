@@ -1,17 +1,18 @@
 package com.vuducminh.nicefood.model;
 
 public class UserModel {
-    private String uid,name,address,phone;
+    private String uid,name,address,phone,banned;
     private double lat,lng;
 
     public UserModel() {
     }
 
-    public UserModel(String uid, String name, String address, String phone) {
+    public UserModel(String uid, String name, String address, String phone,String banned) {
         this.uid = uid;
         this.name = name;
         this.address = address;
         this.phone = phone;
+        this.banned = banned;
     }
 
     public String getUid() {
@@ -60,5 +61,13 @@ public class UserModel {
 
     public void setLng(double lng) {
         this.lng = lng;
+    }
+
+    public String getBanned() {
+        return banned;
+    }
+
+    public void setBanned(String banned) {
+        this.banned = banned;
     }
 }

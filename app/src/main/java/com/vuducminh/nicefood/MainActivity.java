@@ -148,8 +148,11 @@ public class MainActivity extends AppCompatActivity {
                             Toast.makeText(MainActivity.this, "You already registed", Toast.LENGTH_SHORT).show();
 
                             UserModel usersModel = dataSnapshot.getValue(UserModel.class);
+                            if (usersModel.getBanned().equals("1"))
+                                showBannedDialog();
 
-                            goToHomeActivity(usersModel);
+                            else
+                                goToHomeActivity(usersModel);
 
                         } else {
                             showRegisterDialog(user);
@@ -164,6 +167,19 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, "" + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
+    }
+
+    private void showBannedDialog() {
+        androidx.appcompat.app.AlertDialog.Builder banned = new androidx.appcompat.app.AlertDialog.Builder(this);
+        banned.setTitle("Ban Alert !");
+        banned.setMessage("We are sorry, You have been banned because you have violated our Order Rules." + "\n" + "Contact us at mahalladelivery@gmail.com for more info");
+        banned.setNegativeButton("Close the app", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+            }
+        });
+        banned.show();
     }
 
     private void showRegisterDialog(FirebaseUser user) {
@@ -194,6 +210,7 @@ public class MainActivity extends AppCompatActivity {
 
             UserModel userModel = new UserModel();
             userModel.setUid(user.getUid());
+            userModel.setBanned("0");
             userModel.setName(etName.getText().toString());
             userModel.setAddress(etAddress.getText().toString());
             userModel.setPhone(etPhone.getText().toString());
