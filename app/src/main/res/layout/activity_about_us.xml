@@ -17,45 +17,11 @@
             android:id="@+id/par_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Mahalla Delivery is an Android application to facilitate your life and make it easier and quicker concerning ordering food in our town, We hope your experience is well and that you are happy with our app.
-Mahalla Delivery is brought to you by DIMITS Developer team , for any problems , issues or any bugs please go to Contact us navigation and tell us about your complaint or suggestions , Thank you for using our app.
-"
-            android:textSize="20sp"
-            android:layout_marginBottom="10dp"
-            android:textStyle="bold" />
-        <TextView
-            android:textColor="@android:color/black"
-            android:id="@id/par_2"
-            android:layout_below="@+id/par_1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="We believe that this town deserves more improvements and services , so our goal is to fulfill the electronic need here as a part of this town , and we will not stop supporting our applications with continuous updates , improvements and resolving bugs and issues."
-            android:textSize="20sp"
+            android:text="@string/Large_text"
+            android:textSize="17sp"
             android:layout_marginBottom="10dp"
             android:textStyle="bold" />
 
-        <TextView
-            android:textColor="@android:color/black"
-            android:id="@+id/par_3"
-            android:layout_below="@+id/par_2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Why us ?
-We are trying to be different from other competitors so we are concentrating on the speed and saving factors , so we are going to send you notifications about new offers and discounts from different restaurants."
-            android:textSize="20sp"
-            android:layout_marginBottom="10dp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:textColor="@android:color/black"
-            android:id="@+id/par_4"
-            android:layout_below="@id/par_3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="We are concentrating on the every small detail in the app and try to give you a feedback on any action you make with our app to improve your user experience with our app so please if you found our app interesting or something like that , do not hesitate to give us a good rating on the play store and tell your family and friends about our app , this helps us greatly to continue work on other apps and keep your experience better by time."
-            android:textSize="20sp"
-            android:layout_marginBottom="10dp"
-            android:textStyle="bold" />
 
     </RelativeLayout>
 

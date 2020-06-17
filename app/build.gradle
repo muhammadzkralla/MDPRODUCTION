@@ -76,10 +76,10 @@ dependencies {
     implementation 'com.jakewharton:butterknife:10.2.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.1'
 
-    // Thư viên Dexter (Đơn giản code xin quyền của người dùng :  for reqest runtime permission)
+    //for reqest runtime permission)
     implementation 'com.karumi:dexter:6.0.2'
 
-    //Thư viên Google Locations Service (Lấy vị trí người dùng : for get current location)
+    //for get current location)
     implementation 'com.google.android.gms:play-services-location:17.0.0'
 
     // Thư viện braintree

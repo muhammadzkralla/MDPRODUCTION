@@ -36,6 +36,17 @@
     <string name="sign_out">Sign Out</string>
     <string name="update_info">Update Info</string>
 
+    <string name="Large_text">"Mahalla Delivery is an Android application to facilitate your life and make it easier and quicker concerning ordering food in our town, We hope your experience is well and that you are happy with our app.
+Mahalla Delivery is brought to you by DIMITS Developer team , for any problems , issues or any bugs please go to Contact us navigation and tell us about your complaint or suggestions , Thank you for using our app.\n
+We believe that this town deserves more improvements and services , so our goal is to fulfill the electronic need here as a part of this town , and we will not stop supporting our applications with continuous updates , improvements and resolving bugs and issues\n
+Why us ?
+We are trying to be different from other competitors so we are concentrating on the speed and saving factors , so we are going to send you notifications about new offers and discounts from different restaurants."\n\n
+
+      We are concentrating on the every small detail in the app and try to give you a feedback on any action you make with our app to improve your user experience with our app so please if you found our app interesting or something like that , do not hesitate to give us a good rating on the play store and tell your family and friends about our app , this helps us greatly to continue work on other apps and keep your experience better by time.
+
+
+</string>
+
 
     <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyB1PW-fiBSduZXFAfVMpqkErO9U3rgbRLs</string>
 
