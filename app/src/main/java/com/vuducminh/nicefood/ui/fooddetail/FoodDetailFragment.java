@@ -128,7 +128,7 @@ public class FoodDetailFragment extends Fragment implements TextWatcher {
     @OnClick(R.id.img_add_addon)
     void onAddonClick() {
         if (Common.selectedFood.getAddon() != null) {
-            displayAddonList();   // show tất cả các tùy chọn
+            displayAddonList();
             addBottomSheetDialog.show();
         }
     }
