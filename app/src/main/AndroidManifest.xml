@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.vuducminh.nicefood">
+    package="com.dimits.mahalladelivery">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET"/>
@@ -16,16 +16,16 @@
         android:roundIcon="@mipmap/logo_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
-        <activity android:name=".ContactUs"
+        <activity android:name="com.dimits.mahalladelivery.ContactUs"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
-        <activity android:name=".AboutUs"
+        <activity android:name="com.dimits.mahalladelivery.AboutUs"
             />
         <activity
-            android:name=".HomeActivity"
+            android:name="com.dimits.mahalladelivery.HomeActivity"
             android:label="@string/title_activity_home"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".MainActivity"
+        <activity android:name="com.dimits.mahalladelivery.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
 
             <intent-filter>
@@ -35,7 +35,7 @@
             </intent-filter>
         </activity>
 
-        <service android:name=".services.MyFCMServices" >
+        <service android:name="com.dimits.mahalladelivery.services.MyFCMServices" >
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
