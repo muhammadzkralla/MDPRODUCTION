@@ -21,8 +21,9 @@
     <string name="warn"> if you want to change your number you have to make a new account</string>
     <string name="Phone_number">Phone number</string>
 
-    <string name="popular_categories">Popular Categories</string>
-    <string name="best_deals">Best Deals</string>
+    <string name="popular_categories">Common </string>
+    <string name="popular_categories2">Food</string>
+    <string name="best_deals">Recommended</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="menu_slideshow">Slideshow</string>

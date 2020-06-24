@@ -115,7 +115,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         initPlaceClient();
 
-        dialog = new SpotsDialog.Builder().setContext(this).setCancelable(false).build();
+        dialog =  new android.app.AlertDialog.Builder(HomeActivity.this).setCancelable(false)
+                .setMessage("Please wait...").create();
 
         ButterKnife.bind(this);
 

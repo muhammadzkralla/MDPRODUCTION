@@ -19,6 +19,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,6 +35,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
@@ -650,6 +652,24 @@ public class CartFragment extends Fragment implements ILoadTimeFromFirebaseListe
                                         .observeOn(AndroidSchedulers.mainThread())
                                         .subscribe(fcmResponse -> {
                                             // clean sucess
+                                            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                                            builder.setTitle("Order Sent !");
+                                            View view = LayoutInflater.from(getContext()).inflate(R.layout.layout_success, null);
+                                            ImageView img = (ImageView)view.findViewById(R.id.img);
+                                            TextView txt = (TextView)view.findViewById(R.id.txt);
+                                            Glide.with(getContext()).load(R.drawable.ic_done_black_24dp).into(img);
+                                            txt.setText("Success !");
+                                            builder.setView(view);
+                                            builder.setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialog, int which) {
+                                                    dialog.dismiss();
+                                                }
+                                            });
+
+                                            AlertDialog dialog = builder.create();
+                                            dialog.show();
+
                                             Toast.makeText(getContext(), "Order placed Successfully", Toast.LENGTH_SHORT).show();
                                             EventBus.getDefault().postSticky(new CountCartEvent(true));
                                         }, throwable -> {

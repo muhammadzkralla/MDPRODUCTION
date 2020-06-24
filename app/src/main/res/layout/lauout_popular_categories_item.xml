@@ -6,8 +6,8 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/category_image"
-        android:layout_width="75dp"
-        android:layout_height="75dp"/>
+        android:layout_width="65dp"
+        android:layout_height="65dp"/>
 
     <TextView
         android:id="@+id/tv_category_name"

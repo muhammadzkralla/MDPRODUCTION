@@ -13,7 +13,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Deals"
+            android:text="@string/best_deals"
             android:textSize="20sp"
             android:textStyle="bold"
             android:layout_marginLeft="8dp"
@@ -37,12 +37,13 @@
                 app:viewpagerAspectRatio="1.33"/>
 
         </LinearLayout>
-        <LinearLayout
+        <RelativeLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="150dp">
 
             <TextView
+                android:id="@+id/common"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:layout_marginLeft="8dp"
@@ -52,12 +53,25 @@
                 android:text="@string/popular_categories"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
+            <TextView
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginLeft="8dp"
+                android:layout_marginBottom="5dp"
+                android:layout_toRightOf="@+id/common"
+                android:fontFamily="sans-serif-black"
+                android:textColor="#FF5722"
+                android:text="@string/popular_categories2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
 
             <androidx.recyclerview.widget.RecyclerView
+                android:layout_below="@+id/common"
                 android:id="@+id/recycler_popluar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
-        </LinearLayout>
+        </RelativeLayout>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
