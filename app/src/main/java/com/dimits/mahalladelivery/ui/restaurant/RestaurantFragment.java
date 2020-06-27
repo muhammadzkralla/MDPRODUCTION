@@ -97,9 +97,5 @@ public class RestaurantFragment extends Fragment {
         EventBus.getDefault().postSticky(new MenuInflateEvent(false));
     }
 
-    @Override
-    public void onPrepareOptionsMenu(@NonNull Menu menu) {
-        menu.findItem(R.id.action_settings).setVisible(false);
 
-    }
 }

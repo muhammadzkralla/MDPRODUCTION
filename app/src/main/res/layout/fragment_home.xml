@@ -10,16 +10,17 @@
         android:weightSum="5"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/best_deals"
-            android:textSize="20sp"
-            android:textStyle="bold"
             android:layout_marginLeft="8dp"
             android:layout_marginBottom="5dp"
-            android:fontFamily="sans-serif-black"
-            android:textColor="#121212"/>
+            android:fontFamily="sans-serif-thin"
+            android:text="@string/best_deals"
+            android:textColor="#121212"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
 
         <LinearLayout
@@ -44,26 +45,27 @@
 
             <TextView
                 android:id="@+id/common"
-                android:textSize="20sp"
-                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
                 android:layout_marginBottom="5dp"
-                android:fontFamily="sans-serif-black"
-                android:textColor="#121212"
+                android:fontFamily="sans-serif-light"
                 android:text="@string/popular_categories"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-            <TextView
+                android:textColor="#121212"
                 android:textSize="20sp"
-                android:textStyle="bold"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
                 android:layout_marginBottom="5dp"
                 android:layout_toRightOf="@+id/common"
-                android:fontFamily="sans-serif-black"
-                android:textColor="#FF5722"
+                android:fontFamily="sans-serif-thin"
                 android:text="@string/popular_categories2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:textColor="#FF5722"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
 
             <androidx.recyclerview.widget.RecyclerView
@@ -72,16 +74,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
         </RelativeLayout>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Menu"
-            android:textSize="20sp"
-            android:textStyle="bold"
             android:layout_marginLeft="8dp"
             android:layout_marginBottom="5dp"
-            android:fontFamily="sans-serif-black"
-            android:textColor="#121212"/>
+            android:fontFamily="sans-serif-light"
+            android:text="Menu"
+            android:textColor="#121212"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_menu"

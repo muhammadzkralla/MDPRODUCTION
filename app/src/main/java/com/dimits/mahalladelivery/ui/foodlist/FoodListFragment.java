@@ -145,8 +145,5 @@ public class FoodListFragment extends Fragment {
         super.onDestroy();
     }
 
-    @Override
-    public void onPrepareOptionsMenu(@NonNull Menu menu) {
-        menu.findItem(R.id.action_settings).setVisible(false);
-    }
+
 }

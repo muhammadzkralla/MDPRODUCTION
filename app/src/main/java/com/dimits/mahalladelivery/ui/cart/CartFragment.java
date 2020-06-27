@@ -422,11 +422,7 @@ public class CartFragment extends Fragment implements ILoadTimeFromFirebaseListe
         super.onDestroy();
     }
 
-    @Override
-    public void onPrepareOptionsMenu(@NonNull Menu menu) {
-        menu.findItem(R.id.action_settings).setVisible(false);   // Ẩn home menu
-        super.onPrepareOptionsMenu(menu);
-    }
+
 
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
