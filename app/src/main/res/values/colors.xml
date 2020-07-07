@@ -18,4 +18,7 @@
     <color name="bgRowBackground">#E11313</color>
     <color name="colorGold3">#ffc125</color>
     <color name="colorGold4">#E3AA1B</color>
+    <color name="red">#FF0000</color>
+    <color name="black">#121212</color>
+
 </resources>
