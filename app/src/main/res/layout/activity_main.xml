@@ -12,21 +12,23 @@
         android:id="@+id/main"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Mahalla Delivery"
-        android:textSize="40sp"
-        android:layout_weight="1"
         android:layout_centerInParent="true"
-        android:fontFamily="@font/brandon_medium"
-        android:textStyle="bold"
-        android:textColor="@android:color/black"/>
+        android:layout_weight="1"
+        android:fontFamily="sans-serif-light"
+        android:text="Mahalla Delivery"
+        android:textColor="@android:color/black"
+        android:textSize="40sp"
+        android:textStyle="bold" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="welcome!"
         android:layout_below="@+id/main"
         android:layout_centerHorizontal="true"
+        android:fontFamily="serif"
+        android:text="welcome!"
         android:textSize="24sp"
-        android:textStyle="italic"/>
+        android:textStyle="italic" />
 
 
 </RelativeLayout>

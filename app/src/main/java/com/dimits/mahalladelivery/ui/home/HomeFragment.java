@@ -101,7 +101,7 @@ public class HomeFragment extends Fragment {
                 if(adapter != null) {
                     switch (adapter.getItemViewType(position)) {
                         case CommonAgr.DEFAULT_COLUMN_COUNT: return 1;
-                        case CommonAgr.FULL_WIDTH_COLUMN: return 1;
+                        case CommonAgr.FULL_WIDTH_COLUMN: return 2;
                         default: return -1;
                     }
                 }

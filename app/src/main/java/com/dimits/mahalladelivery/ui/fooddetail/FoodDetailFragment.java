@@ -317,14 +317,14 @@ public class FoodDetailFragment extends Fragment implements TextWatcher {
 
         initViews();
 
-        foodDetailViewModel.getModelMutableLiveDataFoodModel().observe(this, new Observer<FoodModel>() {
+        foodDetailViewModel.getModelMutableLiveDataFoodModel().observe(getViewLifecycleOwner(), new Observer<FoodModel>() {
             @Override
             public void onChanged(FoodModel foodModel) {
                 displayInfo(foodModel);
             }
         });
 
-        foodDetailViewModel.getModelMutableLiveDataCommentModel().observe(this, new Observer<CommentModel>() {
+        foodDetailViewModel.getModelMutableLiveDataCommentModel().observe(getViewLifecycleOwner(), new Observer<CommentModel>() {
             @Override
             public void onChanged(CommentModel commentModel) {
                 submitRatingToFirebase(commentModel);

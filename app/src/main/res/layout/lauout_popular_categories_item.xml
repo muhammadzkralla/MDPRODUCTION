@@ -11,11 +11,11 @@
 
     <TextView
         android:id="@+id/tv_category_name"
-        android:text="@string/popular_categories"
-        android:gravity="center_horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="@string/best_deals"
-        android:textSize="20sp"/>
+        android:fontFamily="sans-serif-condensed-light"
+        android:gravity="center_horizontal"
+        android:text="@string/popular_categories"
+        android:textSize="20sp" />
 
 </LinearLayout>

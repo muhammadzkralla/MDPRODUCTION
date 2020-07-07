@@ -25,16 +25,17 @@
         android:background="@color/overlay_color"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
-    <TextView
-        android:id="@+id/tv_category"
-        android:text="@string/popular_categories"
-        android:gravity="center_horizontal|center_vertical"
-        android:layout_gravity="center_vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/brandon_medium"
-        android:textColor="@android:color/white"
-        android:textSize="22sp"/>
+
+        <TextView
+            android:id="@+id/tv_category"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:fontFamily="sans-serif-condensed-light"
+            android:gravity="center_horizontal|center_vertical"
+            android:text="@string/popular_categories"
+            android:textColor="@android:color/white"
+            android:textSize="22sp" />
     </androidx.cardview.widget.CardView>
 
 </FrameLayout>
